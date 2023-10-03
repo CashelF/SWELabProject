@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginPage from './Pages/Login';
-
+import LoginPage from './Pages/LoginPage';
+import SignUpPage from './Pages/SignUpPage'
+import { Login } from '@mui/icons-material';
 
 function App() {
   return (
