@@ -76,7 +76,8 @@ function SignUpPage() {
           <Grid item lg={5} md={5} sm={12} xs={12}>
             <Box sx={{ bgcolor: '#1C1D21', height: '100%'}}>
                 <Stack direction='column'  sx={{
-                    paddingLeft: {xlg: '10rem', lg: '10rem', md: '10rem', sm:'7rem', xs: '5rem'},
+                    paddingLeft: '20%',
+                    paddingRight: '20%',
                     width: '60%',
                     height: '100%',
                     justifyContent: 'center',
