@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import hero_img from '../images/hero_img.png'
 import { ThemeContext } from '@emotion/react';
 import CustomButton from './CustomButton';
+import HowItWorks from './HowItWorks';
 
 const Hero = () => {
     const CustomBox = styled(Box)(({ theme }) => ({
