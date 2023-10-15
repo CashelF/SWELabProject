@@ -124,15 +124,18 @@ const Navbar: React.FC = () => {
           >
             {list("left")}
           </Drawer>
-          <NavbarLogo src={logoImg} alt="logo" />
+          <Typography sx={{
+            color: '#000228',
+            fontWeight: '800',
+            fontSize: '30px'
+          }}>
+            Pindepo
+          </Typography>
         </Box>
 
         <NavbarLinksBox>
           <NavLink variant="body2">Home</NavLink>
           <NavLink variant="body2">Projects</NavLink>
-          <NavLink variant="body2">Tools</NavLink>
-          <NavLink variant="body2">Listed</NavLink>
-          <NavLink variant="body2">Contact</NavLink>
         </NavbarLinksBox>
       </Box>
 
