@@ -31,16 +31,16 @@ function HowItWorks() {
                     color: '#5A6473',
                     fontWeight: '400'
                 }}>
-                    Everything you need to know when you're looking to buy, <br/> rent, or sell - all in one place
+                   Join Projects, checkout or checkin tools<br/> all in one location.
                 </Typography>
             </Container>
             <Container sx={{
                 paddingTop: '3rem',
                 display: 'flex'
             }}>
-                <HowItWorksCard image={join_icon} mainText='Join Guide' mainLink='How to join'/>
-                <HowItWorksCard image={checkout_icon} mainText='Checkout Guides' mainLink='How to Checkout'/>
-                <HowItWorksCard image={checkin_icon} mainText='Checkin Guides' mainLink='How to Checkin'/>
+                <HowItWorksCard image={join_icon} mainText='Join' mainLink='Join Projects'/>
+                <HowItWorksCard image={checkout_icon} mainText='Checkout' mainLink='Checkout From projects'/>
+                <HowItWorksCard image={checkin_icon} mainText='Checkin' mainLink='Checkin To Projects'/>
             </Container>
         </Container>
     );

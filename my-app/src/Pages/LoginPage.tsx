@@ -9,6 +9,7 @@ import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import React from "react";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 
 
@@ -133,17 +134,19 @@ function LoginPage() {
                         paddingTop: '16px'
                     }}>Forgot Password?
                     </Typography>
-                    <Button variant="contained" sx={{
-                        bgcolor: '#9C6FE4',
-                        color: 'white',
-                        borderRadius: '12px',
-                        marginTop: '32px',
-                        fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
-                        '&:hover': {
-                            backgroundColor: '#333437',
-                            boxShadow: 'none',
-                        }
-                    }}>Login</Button>
+                    <Link to="/homepage">
+                        <Button variant="contained" sx={{
+                            bgcolor: '#9C6FE4',
+                            color: 'white',
+                            borderRadius: '12px',
+                            marginTop: '32px',
+                            fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
+                            '&:hover': {
+                                backgroundColor: '#333437',
+                                boxShadow: 'none',
+                            }
+                        }}>Login</Button>
+                    </Link>
                     <Stack direction='row' justifyContent='space-between' marginTop='20px'>
                         <Typography variant="h5" sx={{
                             color: '#ffffff50',
@@ -152,6 +155,7 @@ function LoginPage() {
                         }}>
                             Don't have an account?
                         </Typography>
+                    <Link to="/signup">
                         <Button variant="contained" sx={{
                             bgcolor: '#333437',
                             color: 'white',
@@ -162,6 +166,7 @@ function LoginPage() {
                                 boxShadow: 'none',
                             }
                         }}>Sign Up</Button>
+                    </Link>
                     </Stack>
                 </Stack>
             </Box>
