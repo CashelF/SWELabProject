@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
-
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 
 
@@ -131,6 +131,7 @@ function SignUpPage() {
                                 />
                         </FormControl>
                     </Stack>
+                    <Link to="/">
                     <Button variant="contained" sx={{
                         bgcolor: '#9C6FE4',
                         color: 'white',
@@ -142,6 +143,7 @@ function SignUpPage() {
                             boxShadow: 'none',
                         }
                     }}>SignUp</Button>
+                    </Link>
                     <Stack direction='row' justifyContent='space-between' marginTop='20px'>
                         <Typography variant="h5" sx={{
                             color: '#ffffff50',
@@ -150,6 +152,7 @@ function SignUpPage() {
                         }}>
                             Already have an account?
                         </Typography>
+                        <Link to="/">
                         <Button variant="contained" sx={{
                             bgcolor: '#333437',
                             color: 'white',
@@ -160,6 +163,7 @@ function SignUpPage() {
                                 boxShadow: 'none',
                             }
                         }}>Login</Button>
+                        </Link>
                     </Stack>
                 </Stack>
             </Box>
