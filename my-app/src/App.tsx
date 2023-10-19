@@ -4,13 +4,26 @@ import './App.css';
 import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignUpPage'
 import { Login } from '@mui/icons-material';
-import Hero from './Components/Hero';
+import LandingPage from './Pages/LandingPage';
+import Projects from './Pages/Projects';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+{/* <div style={{margin: 0, padding: 0}}>
+      <LandingPage/>
+</div> */}
 
 function App() {
   return (
-    <div style={{margin: 0, padding: 0}}>
-      <Hero/>
-    </div>
+    <BrowserRouter>
+      <main>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="homepage" element={ <LandingPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="projects" element={<Projects />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 

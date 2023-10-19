@@ -10,6 +10,8 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../images/logoImg.png";
 import { Container, styled, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import CustomButton from "./CustomButton";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Home } from "@mui/icons-material";
 
 interface MobileMenuState {
   left: boolean;
@@ -39,27 +41,40 @@ const Navbar: React.FC = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Features", "Services", "Listed", "Contact"].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index === 0 && <HomeIcon />}
-                  {index === 1 && <FeaturedPlayListIcon />}
-                  {index === 2 && <MiscellaneousServicesIcon />}
-                  {index === 3 && <ListAltIcon />}
-                  {index === 4 && <ContactsIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
+        <ListItem>
+          <Link to="/homepage" style={{textDecoration:'none'}}>
+          <ListItemButton>
+            <ListItemIcon>
+              <HomeIcon />
+              <Typography sx={{
+                paddingLeft: '.5rem'
+              }}>
+                Home
+              </Typography>
+            </ListItemIcon>
+          </ListItemButton>
+          </Link>
+        </ListItem>
+
+        <ListItem>
+          <Link to="/projects" style={{textDecoration:'none'}}>
+          <ListItemButton>
+            <ListItemIcon>
+              <HomeIcon />
+              <Typography sx={{
+                paddingLeft: '.5rem'
+              }}>
+                Projects
+              </Typography>
+            </ListItemIcon>
+          </ListItemButton>
+          </Link>
+        </ListItem>
       </List>
     </Box>
   );
 
-  const NavLink = styled(Typography)(({ theme }) => ({
+  const NavText = styled(Typography)(({ theme }) => ({
     fontSize: "14px",
     color: "#4F5361",
     fontWeight: "bold",
@@ -124,15 +139,22 @@ const Navbar: React.FC = () => {
           >
             {list("left")}
           </Drawer>
-          <NavbarLogo src={logoImg} alt="logo" />
+          <Typography sx={{
+            color: '#000228',
+            fontWeight: '800',
+            fontSize: '30px'
+          }}>
+            Pindepo
+          </Typography>
         </Box>
 
         <NavbarLinksBox>
-          <NavLink variant="body2">Home</NavLink>
-          <NavLink variant="body2">Projects</NavLink>
-          <NavLink variant="body2">Tools</NavLink>
-          <NavLink variant="body2">Listed</NavLink>
-          <NavLink variant="body2">Contact</NavLink>
+          <Link to="/homepage" style={{textDecoration:'none'}}>
+            <NavText variant="body2">Home</NavText>
+          </Link>
+          <Link to="/Projects" style={{textDecoration:'none'}}>
+          <NavText variant="body2">Projects</NavText>
+          </Link>
         </NavbarLinksBox>
       </Box>
 
@@ -144,12 +166,13 @@ const Navbar: React.FC = () => {
           gap: "1rem",
         }}
       >
-        <NavLink variant="body2">Sign Up</NavLink>
+        <Link to="/" style={{textDecoration:'none'}}>
         <CustomButton
           backgroundColor="#0F1B4C"
           color="#fff"
-          buttonText="Register"
+          buttonText="Logout"
         />
+        </Link>
       </Box>
     </NavbarContainer>
   );

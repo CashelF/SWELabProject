@@ -6,6 +6,8 @@ import Navbar from './Navbar'
 import hero_img from '../images/hero_img.png'
 import { ThemeContext } from '@emotion/react';
 import CustomButton from './CustomButton';
+import HowItWorks from './HowItWorks';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 const Hero = () => {
     const CustomBox = styled(Box)(({ theme }) => ({
@@ -58,12 +60,14 @@ const Hero = () => {
                   Tools for all your needs. Create new projects or join projects! 
                   Whatever you decide.
                 </Typography>
+                <Link to="/projects" style={{textDecoration:'none'}}>
                 <CustomButton
                   backgroundColor="#0F1B4C"
                   color="#fff"
                   buttonText="Search Projects"
                   heroBtn={true}
                 />
+                </Link>
               </Box>
     
               <Box sx={{ flex: "1.25" }}>
