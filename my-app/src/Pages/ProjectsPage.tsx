@@ -7,15 +7,14 @@ import HowItWorks from '../Components/HowItWorks'
 import ReviewSection from '../Components/ReviewSection';
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
-const Projects = () => {
+import Projects from '../Components/Projects'
+const ProjectsPage = () => {
     return (
        <Container>
             <Navbar/>
-            <Typography>
-                This is the projects page teehee
-            </Typography>
+            <Projects />
        </Container>
     );
 };
 
-export default Projects;
+export default ProjectsPage;
