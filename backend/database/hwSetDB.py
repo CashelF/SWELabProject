@@ -31,3 +31,17 @@ def addHWSet(collectionName, num, name, capacity, availability):
    }
    collection.insert_one(HWSetDoc)
    client.close()
+   
+def getHWSet(collectionName, num, name, capacity, availability):
+    client = db.get_database()
+    db = client.SWELabProjectHardwareSets
+    collection = db[collectionName]
+    HWSetDoc = {
+        "num": num,
+        "name": name,
+        "capacity": capacity,
+        "availability": availability
+    }
+    document = collection.find_one(HWSetDoc)
+    client.close()
+    return document
