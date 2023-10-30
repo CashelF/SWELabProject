@@ -95,9 +95,9 @@ function HardwareSet(props: HardwareSetProps) {
           </Button>
         </Container>
       </Container>
-      <Button sx={{ height: '49%', marginTop: '2%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckOut2}>
+      {/*<Button sx={{ height: '49%', marginTop: '2%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckOut2}>
             Sign In 
-        </Button>
+      </Button>*/}
     </Container>
   );
 }

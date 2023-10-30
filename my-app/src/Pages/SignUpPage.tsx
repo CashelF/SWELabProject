@@ -28,7 +28,7 @@ function SignUpPage() {
                 flex: '1', 
         }}>
           <Grid item lg={7} md={7} sm={12} xs={12}>
-            <Box sx={{ bgcolor: '#925FE2', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <Box sx={{ bgcolor: '#7398F7', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
               <Stack>
                 <Stack sx={{
                     paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},
@@ -47,7 +47,7 @@ function SignUpPage() {
                         fontWeight: 500,
                         lineHeight: {xl: '80px', lg: '80px', md: '50px', sm: '50px', xs: '50px'},
                     }}> 
-                        tools portal
+                        Pindepo
                     </Typography>
                     <Typography sx={{
                         color: '#EEEEEE',
@@ -133,7 +133,7 @@ function SignUpPage() {
                     </Stack>
                     <Link to="/">
                     <Button variant="contained" sx={{
-                        bgcolor: '#9C6FE4',
+                        bgcolor: '#7398F7',
                         color: 'white',
                         borderRadius: '12px',
                         marginTop: '32px',
@@ -159,7 +159,7 @@ function SignUpPage() {
                             fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                             borderRadius: '8px',
                             '&:hover': {
-                                backgroundColor: '#925FE2',
+                                backgroundColor: '#7398F7',
                                 boxShadow: 'none',
                             }
                         }}>Login</Button>
