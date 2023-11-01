@@ -1,5 +1,5 @@
-import database as db
-import cipher
+import database.database_methods as db
+import database.cipher as cipher
 
 def addNewUser(userId, password):
    try:
@@ -8,8 +8,9 @@ def addNewUser(userId, password):
       encryptedPass = cipher.encrypt(password, 3, 1)
       collection.insert_one({'userId': userId, 'password': encryptedPass})
       client.close()
-   except Exception:
-      print("Error in adding a new user")
+   except Exception as ex:
+      template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+      print(template.format(type(ex).__name__, ex.args))
    
 def getUser(userId, password):
    try:
@@ -27,3 +28,6 @@ def getUser(userId, password):
       return user
    except Exception:
       print("Error in adding a new user")
+
+if __name__ == "__main__":
+    addNewUser("testuser", "testpass")

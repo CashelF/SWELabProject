@@ -11,7 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
+import axios from 'axios';
 
 
 function SignUpPage() {
@@ -20,8 +20,26 @@ function SignUpPage() {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
       };
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    
+    const handleChangePassword = (event: any) => {
+        setPassword(event.target.value)
+    }
 
-
+    const handleChangeUsername = (event: any) => {
+        setUsername(event.target.value)
+    }
+    
+    const handleClick = () => {
+        console.log("Signup clicked")
+        const url = `http://localhost:5000/signup/${username}/${password}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+        })
+    }
+    
     return (
         <div style={{ display: 'flex', height: '100vh'}}>
         <Grid container sx={{ padding: '0 0 0 0' ,
@@ -101,7 +119,7 @@ function SignUpPage() {
                         paddingTop: '24px'
                     }}>
 
-                        <TextField id="standard-basic" label="Username" variant="standard" sx={{
+                        <TextField id="standard-basic" label="Username" variant="standard" onChange={handleChangeUsername} sx={{
                         input: {color: '#ffffff50'},
                         label: {color: '#ffffff50'},
                         '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }}}/>
@@ -114,6 +132,7 @@ function SignUpPage() {
                                 <Input
                                     id="standard-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
+                                    onChange={handleChangePassword}
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -132,7 +151,7 @@ function SignUpPage() {
                         </FormControl>
                     </Stack>
                     <Link to="/">
-                    <Button variant="contained" sx={{
+                    <Button onClick={handleClick} variant="contained" sx={{
                         bgcolor: '#9C6FE4',
                         color: 'white',
                         borderRadius: '12px',

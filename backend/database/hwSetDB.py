@@ -1,4 +1,4 @@
-import database as db
+import database.database_methods as db
 
 def queryAvailability(projectName, HWSetNum):
    try:
