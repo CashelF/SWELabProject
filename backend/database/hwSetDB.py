@@ -14,17 +14,16 @@ def queryAvailability(projectName, HWSetNum):
    return availability
 
 def createHWSetCollection(collectionName):
-   client = db.get_database()
-   db = client.SWELabProjectHardwareSets
-   collection = db[collectionName]
-   client.close()
+    client = db.get_database()
+    db = client.SWELabProjectHardwareSets
+    collection = db[collectionName]
+    client.close()
 
-def addHWSet(collectionName, num, name, capacity, availability):
+def addHWSet(projectId, name, capacity, availability):
    client = db.get_database()
    db = client.SWELabProjectHardwareSets
-   collection = db[collectionName]
+   collection = db[projectId]
    HWSetDoc = {
-      "num": num,
       "name": name,
       "capacity": capacity,
       "availability": availability
@@ -32,10 +31,11 @@ def addHWSet(collectionName, num, name, capacity, availability):
    collection.insert_one(HWSetDoc)
    client.close()
    
-def getHWSet(collectionName, num, name, capacity, availability):
+def getHWSet(projectId, num, name, capacity, availability):
+    #TODO: query this by projectId, HWSetName, and the number
     client = db.get_database()
     db = client.SWELabProjectHardwareSets
-    collection = db[collectionName]
+    collection = db[projectId]
     HWSetDoc = {
         "num": num,
         "name": name,
@@ -45,3 +45,20 @@ def getHWSet(collectionName, num, name, capacity, availability):
     document = collection.find_one(HWSetDoc)
     client.close()
     return document
+
+def checkIn_HWSet(projectId, qty):
+   client = db.get_database()
+   db = client['Projects']
+   project = db[projectId]
+   hwSet = project.find_one(num)
+   hwSet.checkIn(qty)
+   #insert it back into the project collection
+    
+def checkOut_HWSet(projectid, qty):
+   client = db.get_database()
+   db = client['Projects']
+   project = db[projectId]
+   hwSet = project.find_one(num)
+   hwSet.checkOut(qty)
+   #insert it back into the project collection
+   project.find_one_and_update()
