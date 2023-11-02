@@ -138,6 +138,7 @@ function LoginPage() {
                         <Button variant="contained" sx={{
                             bgcolor: '#9C6FE4',
                             color: 'white',
+                            width: '100%',
                             borderRadius: '12px',
                             marginTop: '32px',
                             fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
