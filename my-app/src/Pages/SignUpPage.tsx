@@ -155,6 +155,7 @@ function SignUpPage() {
                         bgcolor: '#9C6FE4',
                         color: 'white',
                         borderRadius: '12px',
+                        width: '100%',
                         marginTop: '32px',
                         fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                         '&:hover': {
