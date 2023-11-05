@@ -171,7 +171,8 @@ const Navbar: React.FC = () => {
               color: '#000228',
               fontWeight: '800',
               fontSize: '30px',
-              cursor: "pointer", "&:hover": {color: "#7398F7",}
+              cursor: "pointer", 
+              "&:hover": {color: "#7398F7",}
             }}>
               Pindepo
             </Typography>
@@ -179,9 +180,6 @@ const Navbar: React.FC = () => {
         </Box>
 
         <NavbarLinksBox>
-          {/*<Link to="/homepage" style={{textDecoration:'none'}}>
-            <NavText variant="body2">Home</NavText>
-          </Link>*/}
           <Link to="/create-project" style={{textDecoration:'none'}}>
             <NavText variant="body2">Create New Project</NavText>
           </Link>

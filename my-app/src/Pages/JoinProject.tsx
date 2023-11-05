@@ -47,22 +47,22 @@ function Join() {
                         input: {color: '#0F1B4C'},
                         label: {color: '#0F1B4C'},
                         '& .MuiInput-underline:before': { borderBottomColor: '#0F1B4C' }}}/>
-                    <Stack>
+                    <div>
                         <Link to="/projects">
-                        <Button variant="contained" sx={{
-                            bgcolor: '#0F1B4C',
-                            color: 'white',
-                            borderRadius: '12px',
-                            marginTop: '32px',
-                            fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
-                            '&:hover': {
-                                backgroundColor: '#333437',
-                                boxShadow: 'none',
-                            }
-                        }}>Join
-                        </Button>
+                            <Button variant="contained" sx={{
+                                bgcolor: '#0F1B4C',
+                                color: 'white',
+                                borderRadius: '12px',
+                                marginTop: '32px',
+                                fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
+                                '&:hover': {
+                                    backgroundColor: '#7398F7',
+                                    boxShadow: 'none',
+                                }
+                            }}>Join
+                            </Button>
                         </Link>
-                    </Stack>
+                    </div>
                 </Stack>
       </Container>
     );

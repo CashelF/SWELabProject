@@ -65,7 +65,10 @@ const Hero = () => {
                 >
                   Manage your projects. Checkout and check-in hardware. All one click away.
                 </Typography>
-                <ProjButtonBox>
+                <ProjButtonBox 
+                  sx={{
+                    display: 'flex',
+                    flexDirection: {xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row'}}}>
                   <Link to="/create-project" style={{textDecoration:'none'}}>
                   <CustomButton
                     backgroundColor="#0F1B4C"

@@ -10,10 +10,6 @@ import CreateNewProject from './Pages/CreateNewProject';
 import JoinProject from './Pages/JoinProject';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-{/* <div style={{margin: 0, padding: 0}}>
-      <LandingPage/>
-</div> */}
-
 function App() {
   return (
     <BrowserRouter>
