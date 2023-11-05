@@ -6,11 +6,9 @@ import SignUpPage from './Pages/SignUpPage'
 import { Login } from '@mui/icons-material';
 import LandingPage from './Pages/LandingPage';
 import ProjectsPage from './Pages/ProjectsPage';
+import CreateNewProject from './Pages/CreateNewProject';
+import JoinProject from './Pages/JoinProject';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
-{/* <div style={{margin: 0, padding: 0}}>
-      <LandingPage/>
-</div> */}
 
 function App() {
   return (
@@ -21,6 +19,8 @@ function App() {
           <Route path="homepage" element={ <LandingPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="projects" element={<ProjectsPage />} />
+          <Route path="create-project" element={<CreateNewProject />} />
+          <Route path="join-project" element={<JoinProject />} />
         </Routes>
       </main>
     </BrowserRouter>
