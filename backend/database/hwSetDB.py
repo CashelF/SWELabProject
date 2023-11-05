@@ -1,10 +1,11 @@
 import database as db
+from models.HWSet import HWSet
 
 def queryAvailability(projectName, HWSetNum):
    try:
       client = db.get_database()
-      db = client.SWELabProjectHardwareSets
-      collection = db[projectName]
+      projDb = client.SWELabProjectHardwareSets
+      collection = projDb[projectName]
       document = collection.find_one({"num": HWSetNum})
       availability = document.get('availability', None)
       client.close()
@@ -15,50 +16,52 @@ def queryAvailability(projectName, HWSetNum):
 
 def createHWSetCollection(collectionName):
     client = db.get_database()
-    db = client.SWELabProjectHardwareSets
-    collection = db[collectionName]
+    projDb = client.SWELabProjectHardwareSets
+    collection = projDb[collectionName]
     client.close()
 
-def addHWSet(projectId, name, capacity, availability):
+def addHWSet(projectId, name, capacity):
    client = db.get_database()
-   db = client.SWELabProjectHardwareSets
-   collection = db[projectId]
-   HWSetDoc = {
-      "name": name,
-      "capacity": capacity,
-      "availability": availability
-   }
-   collection.insert_one(HWSetDoc)
+   projDb = client.SWELabProjectHardwareSets
+   if projectId not in projDb.list_collection_names():
+      print("Project does not exist")
+      return
+   collection = projDb[projectId]
+   HWSetDoc = HWSet(name, capacity)
+   collection.insert_one(HWSetDoc.to_dict())
    client.close()
    
-def getHWSet(projectId, num, name, capacity, availability):
-    #TODO: query this by projectId, HWSetName, and the number
-    client = db.get_database()
-    db = client.SWELabProjectHardwareSets
-    collection = db[projectId]
-    HWSetDoc = {
-        "num": num,
-        "name": name,
-        "capacity": capacity,
-        "availability": availability
-    }
-    document = collection.find_one(HWSetDoc)
-    client.close()
-    return document
+def getHWSet(projectId, name):
+   client = db.get_database()
+   projDb = client.SWELabProjectHardwareSets
+   if projectId not in projDb.list_collection_names():
+      print("Project does not exist")
+      return
+   collection = projDb[projectId]
+   document = collection.find_one(name)
+   client.close()
+   return document
 
-def checkIn_HWSet(projectId, qty):
+def checkIn_HWSet(projectId, name, qty):
    client = db.get_database()
-   db = client['Projects']
-   project = db[projectId]
-   hwSet = project.find_one(num)
+   projDb = client['Projects']
+   project = projDb[projectId]
+   hwSet = project.find_one(name)
    hwSet.checkIn(qty)
-   #insert it back into the project collection
+   project.update_one({"name": name}, {"$set": {"availability": hwSet.availability}})
     
-def checkOut_HWSet(projectid, qty):
+def checkOut_HWSet(projectId, name, qty):
    client = db.get_database()
-   db = client['Projects']
-   project = db[projectId]
-   hwSet = project.find_one(num)
+   projDb = client['Projects']
+   project = projDb[projectId]
+   hwSet = project.find_one(name)
    hwSet.checkOut(qty)
-   #insert it back into the project collection
-   project.find_one_and_update()
+   project.update_one({"name": name}, {"$set": {"availability": hwSet.availability}})
+
+
+if __name__ == '__main__':
+   
+   createHWSetCollection("test1")
+   addHWSet("Proj1", "HW1", 500)
+   
+   
