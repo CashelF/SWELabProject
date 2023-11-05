@@ -11,7 +11,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 
 function SignUpPage() {
@@ -20,15 +21,33 @@ function SignUpPage() {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
       };
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    
+    const handleChangePassword = (event: any) => {
+        setPassword(event.target.value)
+    }
 
-
+    const handleChangeUsername = (event: any) => {
+        setUsername(event.target.value)
+    }
+    
+    const handleSignup = () => {
+        console.log("Signup clicked")
+        const url = `http://localhost:5000/signup/${username}/${password}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+        })
+    }
+    
     return (
         <div style={{ display: 'flex', height: '100vh'}}>
         <Grid container sx={{ padding: '0 0 0 0' ,
                 flex: '1', 
         }}>
           <Grid item lg={7} md={7} sm={12} xs={12}>
-            <Box sx={{ bgcolor: '#925FE2', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <Box sx={{ bgcolor: '#7398F7', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
               <Stack>
                 <Stack sx={{
                     paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},
@@ -47,7 +66,7 @@ function SignUpPage() {
                         fontWeight: 500,
                         lineHeight: {xl: '80px', lg: '80px', md: '50px', sm: '50px', xs: '50px'},
                     }}> 
-                        tools portal
+                        Pindepo
                     </Typography>
                     <Typography sx={{
                         color: '#EEEEEE',
@@ -101,7 +120,7 @@ function SignUpPage() {
                         paddingTop: '24px'
                     }}>
 
-                        <TextField id="standard-basic" label="Username" variant="standard" sx={{
+                        <TextField id="standard-basic" label="Username" variant="standard" onChange={handleChangeUsername} sx={{
                         input: {color: '#ffffff50'},
                         label: {color: '#ffffff50'},
                         '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }}}/>
@@ -114,6 +133,7 @@ function SignUpPage() {
                                 <Input
                                     id="standard-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
+                                    onChange={handleChangePassword}
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -132,10 +152,11 @@ function SignUpPage() {
                         </FormControl>
                     </Stack>
                     <Link to="/">
-                    <Button variant="contained" sx={{
-                        bgcolor: '#9C6FE4',
+                    <Button onClick={handleSignup} variant="contained" sx={{
+                        bgcolor: '#7398F7',
                         color: 'white',
                         borderRadius: '12px',
+                        width: '100%',
                         marginTop: '32px',
                         fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                         '&:hover': {
@@ -159,7 +180,7 @@ function SignUpPage() {
                             fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                             borderRadius: '8px',
                             '&:hover': {
-                                backgroundColor: '#925FE2',
+                                backgroundColor: '#7398F7',
                                 boxShadow: 'none',
                             }
                         }}>Login</Button>

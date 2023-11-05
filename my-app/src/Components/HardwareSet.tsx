@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Typography, Button, Container, TextField } from '@mui/material';
+import { Typography, Button, Container, TextField, Stack } from '@mui/material';
 
 interface HardwareSetProps {
   usedSet1: number;
@@ -8,8 +8,8 @@ interface HardwareSetProps {
 }
 
 function HardwareSet(props: HardwareSetProps) {
-  const [availability1, setAvailability1] = useState(props.usedSet1);
-  const [availability2, setAvailability2] = useState(props.usedSet2);
+  const [availability1, setAvailability1] = useState(props.capacity - props.usedSet1);
+  const [availability2, setAvailability2] = useState(props.capacity - props.usedSet2);
   const [capacity, setCapacity] = useState(props.capacity);
 
   const [inputValue, setInputValue] = useState('');
@@ -51,53 +51,86 @@ function HardwareSet(props: HardwareSetProps) {
   return (
     <Container sx={{ display: 'flex', 
                 alignItems: 'center',
+                padding: '10px',
                 flexDirection: {xs: 'column', sm: 'column', md: 'column', lg: 'row', xl: 'row'}
      }}>
-      <Container sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <Typography>
-          HWSet1: {availability1}/{props.capacity}
-        </Typography>
-        <Typography>
-          HWSet2: {availability2}/{props.capacity}
-        </Typography>
-      </Container>
-      <Container>
-        <TextField id="outlined-basic" label="Enter Qty" variant="outlined" onChange={handleInputChange} />
-        <TextField id="outlined-basic" label="Enter Qty" variant="outlined" onChange={handleInputChange} />
-      </Container>
-      <Container sx={{ display: 'flex',
-        }}>
-        <Container sx={{
+      <Stack sx={{alignItems: 'center',}}>
+          <Typography 
+            sx={{
+              fontWeight: 'bold'
+            }} 
+              variant="h6">
+            Hardware Set 1
+          </Typography>
+            <Container sx={{
             display: 'flex',
-            flexDirection: {xs: 'column', sm: 'column', md: 'column', lg: 'column', xl: 'column'}
-        }}>
-          <Button sx={{ height: '49%', bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckIn1}>
-            Check In.
-          </Button>
-          <Button sx={{ height: '49%', marginTop: '2%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckIn2}>
-            Check In.
-          </Button>
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Stack>
+              <Typography>
+                Available: {availability1}/{props.capacity}
+              </Typography>
+              <Typography>
+                Checked Out: {props.capacity-availability1}
+              </Typography>
+            </Stack>
+            <Stack>
+              <Container>
+                <TextField sx={{marginBottom: "0.5rem", marginTop: "0.5rem", borderWidth: '4px'}} id="outlined-basic" label="Enter Qty" variant="outlined" onChange={handleInputChange} />
+              </Container>
+              <Container sx={{ display: 'flex',
+              }}>
+                <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckIn1}>
+                  Check In
+                </Button>
+                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckOut1}>
+                  Check Out
+                </Button>
+              </Container>
+            </Stack>
         </Container>
-        <Container sx={{
+      </Stack>
+
+      <Stack sx={{alignItems: 'center',}}>
+          <Typography 
+            sx={{
+              fontWeight: 'bold'
+            }}
+            variant="h6">
+            Hardware Set 2
+          </Typography>
+            <Container sx={{
             display: 'flex',
-            flexDirection: {xs: 'column', sm: 'column', md: 'column', lg: 'column', xl: 'column'}
-        }}>
-          <Button sx={{ height: '49%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckOut1}>
-            Check Out
-          </Button>
-          <Button sx={{ height: '49%', marginTop: '2%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckOut2}>
-            Check Out
-          </Button>
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Stack>
+              <Typography>
+                Available: {availability2}/{props.capacity}
+              </Typography>
+              <Typography>
+                Checked Out: {props.capacity-availability2}
+              </Typography>
+            </Stack>
+            <Stack>
+              <Container>
+                <TextField sx={{marginBottom: "0.5rem", marginTop: "0.5rem", borderWidth: '4px'}} id="outlined-basic" label="Enter Qty" variant="outlined" onChange={handleInputChange} />
+              </Container>
+              <Container sx={{ display: 'flex',
+              }}>
+                <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckIn2}>
+                  Check In
+                </Button>
+                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckOut2}>
+                  Check Out
+                </Button>
+              </Container>
+            </Stack>
         </Container>
-      </Container>
-      <Button sx={{ height: '49%', marginTop: '2%',  bgcolor: '#0F1B4C' }} variant="contained" onClick={handleCheckOut2}>
-            Sign In 
-        </Button>
+      </Stack>
     </Container>
   );
 }
