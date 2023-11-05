@@ -11,6 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 
@@ -31,12 +32,26 @@ function SignUpPage() {
         setUsername(event.target.value)
     }
     
-    const handleClick = () => {
+    const handleSignup = () => {
         console.log("Signup clicked")
         const url = `http://localhost:5000/signup/${username}/${password}`;
         axios.post(url)
         .then(res => {
             console.log(res.data);
+        })
+    }
+
+    const handleLogin = () => {
+        console.log("Login clicked")
+        const url = `http://localhost:5000/login/${username}/${password}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Login successful")
+                //const navigate = useNavigate();
+                //navigate('/')
+            }
         })
     }
     
@@ -151,7 +166,7 @@ function SignUpPage() {
                         </FormControl>
                     </Stack>
                     <Link to="/">
-                    <Button onClick={handleClick} variant="contained" sx={{
+                    <Button onClick={handleSignup} variant="contained" sx={{
                         bgcolor: '#9C6FE4',
                         color: 'white',
                         borderRadius: '12px',
@@ -172,7 +187,7 @@ function SignUpPage() {
                             Already have an account?
                         </Typography>
                         <Link to="/">
-                        <Button variant="contained" sx={{
+                        <Button onClick={handleLogin} variant="contained" sx={{
                             bgcolor: '#333437',
                             color: 'white',
                             fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
