@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from database.userDB import addNewUser, getUser
+from database.userDB import addNewUser, getExistingUser
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def addUser(username, password):
 
 @app.route("/login/<username>/<password>", methods=['POST'])
 def getUser(username, password):
-   user = getUser(username, password)
+   user = getExistingUser(username, password)
    if user:
       return jsonify({'success': True})
    else:

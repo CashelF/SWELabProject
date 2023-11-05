@@ -40,20 +40,6 @@ function SignUpPage() {
             console.log(res.data);
         })
     }
-
-    const handleLogin = () => {
-        console.log("Login clicked")
-        const url = `http://localhost:5000/login/${username}/${password}`;
-        axios.post(url)
-        .then(res => {
-            console.log(res.data);
-            if (res.data.success === true) {
-                console.log("Login successful")
-                //const navigate = useNavigate();
-                //navigate('/')
-            }
-        })
-    }
     
     return (
         <div style={{ display: 'flex', height: '100vh'}}>
@@ -188,7 +174,7 @@ function SignUpPage() {
                             Already have an account?
                         </Typography>
                         <Link to="/">
-                        <Button onClick={handleLogin} variant="contained" sx={{
+                        <Button variant="contained" sx={{
                             bgcolor: '#333437',
                             color: 'white',
                             fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},

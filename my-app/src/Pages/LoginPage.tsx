@@ -10,7 +10,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 
 function LoginPage() {
@@ -19,6 +20,31 @@ function LoginPage() {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
       };
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    
+    const handleChangePassword = (event: any) => {
+        setPassword(event.target.value)
+    }
+
+    const handleChangeUsername = (event: any) => {
+        setUsername(event.target.value)
+    }
+
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        console.log("Login clicked")
+        const url = `http://localhost:5000/login/${username}/${password}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Login successful")
+                navigate('/homepage')
+            }
+        })
+    }
 
     return (
         <div style={{ display: 'flex', height: '100vh'}}>
@@ -98,7 +124,7 @@ function LoginPage() {
                     <Stack sx={{
                         paddingTop: '24px'
                     }}>
-                        <TextField id="standard-basic" label="Username" variant="standard" sx={{
+                        <TextField id="standard-basic" label="Username" variant="standard" onChange={handleChangeUsername} sx={{
                         input: {color: '#ffffff50'},
                         label: {color: '#ffffff50'},
                         '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }}}/>
@@ -110,6 +136,7 @@ function LoginPage() {
                                 <Input
                                     id="standard-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
+                                    onChange={handleChangePassword}
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -134,8 +161,7 @@ function LoginPage() {
                         paddingTop: '16px'
                     }}>Forgot Password?
                     </Typography>
-                    <Link to="/homepage">
-                        <Button variant="contained" sx={{
+                        <Button onClick={handleLogin} variant="contained" sx={{
                             bgcolor: '#7398F7',
                             color: 'white',
                             width: '100%',
@@ -147,7 +173,6 @@ function LoginPage() {
                                 boxShadow: 'none',
                             }
                         }}>Login</Button>
-                    </Link>
                     <Stack direction='row' justifyContent='space-between' marginTop='20px'>
                         <Typography variant="h5" sx={{
                             color: '#ffffff50',
