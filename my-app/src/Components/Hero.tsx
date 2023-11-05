@@ -31,6 +31,12 @@ const Hero = () => {
           fontSize: "40px",
         },
       }));
+
+      const ProjButtonBox = styled(Box)(({ theme }) => ({
+        display: "flex",
+        gap: "20px",
+
+      }));
     
       return (
         <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
@@ -51,23 +57,35 @@ const Hero = () => {
                   Welcome to Pindepo
                 </Typography>
                 <Title variant="h1">
-                  Checkout and checkin various tools
+                  Create and Join Projects
                 </Title>
                 <Typography
                   variant="body2"
                   sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
                 >
-                  Tools for all your needs. Create new projects or join projects! 
-                  Whatever you decide.
+                  Manage your projects. Checkout and check-in hardware. All one click away.
                 </Typography>
-                <Link to="/projects" style={{textDecoration:'none'}}>
-                <CustomButton
-                  backgroundColor="#0F1B4C"
-                  color="#fff"
-                  buttonText="Search Projects"
-                  heroBtn={true}
-                />
-                </Link>
+                <ProjButtonBox 
+                  sx={{
+                    display: 'flex',
+                    flexDirection: {xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row'}}}>
+                  <Link to="/create-project" style={{textDecoration:'none'}}>
+                  <CustomButton
+                    backgroundColor="#0F1B4C"
+                    color="#fff"
+                    buttonText="Create New Project"
+                    heroBtn={true}
+                  />
+                  </Link>
+                  <Link to="/join-project" style={{textDecoration:'none'}}>
+                  <CustomButton
+                    backgroundColor="#0F1B4C"
+                    color="#fff"
+                    buttonText="Join Project"
+                    heroBtn={true}
+                  />
+                  </Link>
+                </ProjButtonBox>
               </Box>
     
               <Box sx={{ flex: "1.25" }}>

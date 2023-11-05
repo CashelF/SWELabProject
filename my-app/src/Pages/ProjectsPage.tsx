@@ -12,7 +12,7 @@ const ProjectsPage = () => {
     return (
        <Container>
             <Navbar/>
-            <Projects />
+            <Projects/>
        </Container>
     );
 };
