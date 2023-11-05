@@ -11,6 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 
@@ -31,7 +32,7 @@ function SignUpPage() {
         setUsername(event.target.value)
     }
     
-    const handleClick = () => {
+    const handleSignup = () => {
         console.log("Signup clicked")
         const url = `http://localhost:5000/signup/${username}/${password}`;
         axios.post(url)
@@ -151,7 +152,7 @@ function SignUpPage() {
                         </FormControl>
                     </Stack>
                     <Link to="/">
-                    <Button onClick={handleClick} variant="contained" sx={{
+                    <Button onClick={handleSignup} variant="contained" sx={{
                         bgcolor: '#7398F7',
                         color: 'white',
                         borderRadius: '12px',

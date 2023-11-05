@@ -12,7 +12,7 @@ def addNewUser(userId, password):
       template = "An exception of type {0} occurred. Arguments:\n{1!r}"
       print(template.format(type(ex).__name__, ex.args))
    
-def getUser(userId, password):
+def getExistingUser(userId, password):
    try:
       client = db.get_database()
       collection = client['SWELabProjectDB']['Users']
@@ -25,9 +25,10 @@ def getUser(userId, password):
             user = None
       
       client.close()
+      print(user)
       return user
    except Exception:
       print("Error in adding a new user")
 
 if __name__ == "__main__":
-    addNewUser("testuser", "testpass")
+    getUser("yejean", "kim")
