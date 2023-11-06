@@ -1,19 +1,6 @@
 import database as db
 from models.HWSet import HWSet
 
-def queryAvailability(projectName, HWSetNum):
-   try:
-      client = db.get_database()
-      projDb = client.SWELabProjectHardwareSets
-      collection = projDb[projectName]
-      document = collection.find_one({"num": HWSetNum})
-      availability = document.get('availability', None)
-      client.close()
-   except Exception:
-      print("Error in querying availability")
-      return None
-   return availability
-
 def createHWSetCollection(collectionName):
     client = db.get_database()
     projDb = client.SWELabProjectHardwareSets
@@ -58,9 +45,20 @@ def checkOut_HWSet(projectId, name, qty):
    hwSet.checkOut(qty)
    project.update_one({"name": name}, {"$set": {"availability": hwSet.availability}})
 
+def queryAvailability(projectName, HWSetNum):
+   try:
+      client = db.get_database()
+      projDb = client.SWELabProjectHardwareSets
+      collection = projDb[projectName]
+      document = collection.find_one({"num": HWSetNum})
+      availability = document.get('availability', None)
+      client.close()
+   except Exception:
+      print("Error in querying availability")
+      return None
+   return availability
 
 if __name__ == '__main__':
-   
    createHWSetCollection("test1")
    addHWSet("Proj1", "HW1", 500)
    
