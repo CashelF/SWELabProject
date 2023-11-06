@@ -24,14 +24,14 @@ function HowItWorks() {
                     color: '#000339',
                     fontWeight: '700'
                 }}>
-                    How it works ?
+                    How it works?
                 </Typography>
                 <Typography sx={{
                     fontSize: '16px',
                     color: '#5A6473',
                     fontWeight: '400'
                 }}>
-                   Join Projects, checkout or checkin tools<br/> all in one location.
+                   Join projects. Checkout and check-in tools.<br/> All in one location.
                 </Typography>
             </Container>
             <Container sx={{
@@ -39,7 +39,7 @@ function HowItWorks() {
                 display: 'flex'
             }}>
                 <HowItWorksCard image={join_icon} mainText='Join' mainLink='Join Projects'/>
-                <HowItWorksCard image={checkout_icon} mainText='Checkout' mainLink='Checkout From projects'/>
+                <HowItWorksCard image={checkout_icon} mainText='Checkout' mainLink='Checkout From Projects'/>
                 <HowItWorksCard image={checkin_icon} mainText='Checkin' mainLink='Checkin To Projects'/>
             </Container>
         </Container>

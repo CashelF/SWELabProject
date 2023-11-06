@@ -57,14 +57,41 @@ const Navbar: React.FC = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/projects" style={{textDecoration:'none'}}>
+          <Link to="/create-project" style={{textDecoration:'none'}}>
           <ListItemButton>
             <ListItemIcon>
-              <HomeIcon />
               <Typography sx={{
                 paddingLeft: '.5rem'
               }}>
-                Projects
+                Create New Project
+              </Typography>
+            </ListItemIcon>
+          </ListItemButton>
+          </Link>
+        </ListItem>
+
+        <ListItem>
+          <Link to="/join-project" style={{textDecoration:'none'}}>
+          <ListItemButton>
+            <ListItemIcon>
+              <Typography sx={{
+                paddingLeft: '.5rem'
+              }}>
+                Join Project
+              </Typography>
+            </ListItemIcon>
+          </ListItemButton>
+          </Link>
+        </ListItem>
+
+        <ListItem>
+          <Link to="/projects" style={{textDecoration:'none'}}>
+          <ListItemButton>
+            <ListItemIcon>
+              <Typography sx={{
+                paddingLeft: '.5rem'
+              }}>
+                My Projects
               </Typography>
             </ListItemIcon>
           </ListItemButton>
@@ -80,7 +107,7 @@ const Navbar: React.FC = () => {
     fontWeight: "bold",
     cursor: "pointer",
     "&:hover": {
-      color: "#fff",
+      color: "#7398F7",
     },
   }));
 
@@ -139,21 +166,28 @@ const Navbar: React.FC = () => {
           >
             {list("left")}
           </Drawer>
-          <Typography sx={{
-            color: '#000228',
-            fontWeight: '800',
-            fontSize: '30px'
-          }}>
-            Pindepo
-          </Typography>
+          <Link to="/homepage" style={{textDecoration:'none'}}>
+            <Typography sx={{
+              color: '#000228',
+              fontWeight: '800',
+              fontSize: '30px',
+              cursor: "pointer", 
+              "&:hover": {color: "#7398F7",}
+            }}>
+              Pindepo
+            </Typography>
+          </Link>
         </Box>
 
         <NavbarLinksBox>
-          <Link to="/homepage" style={{textDecoration:'none'}}>
-            <NavText variant="body2">Home</NavText>
+          <Link to="/create-project" style={{textDecoration:'none'}}>
+            <NavText variant="body2">Create New Project</NavText>
+          </Link>
+          <Link to="/join-project" style={{textDecoration:'none'}}>
+            <NavText variant="body2">Join Project</NavText>
           </Link>
           <Link to="/Projects" style={{textDecoration:'none'}}>
-          <NavText variant="body2">Projects</NavText>
+            <NavText variant="body2">My Projects</NavText>
           </Link>
         </NavbarLinksBox>
       </Box>
