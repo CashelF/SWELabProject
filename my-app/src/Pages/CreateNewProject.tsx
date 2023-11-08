@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Button, Typography, Grid, Box, Stack, TextField} from "@mui/material";
 import Navbar from '../Components/Navbar';
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate} from 'react-router-dom';
 import create_project_img from '../images/create_project_img.png'
 import Footer from '../Components/Footer';
 import { Height } from '@mui/icons-material';
@@ -16,7 +16,6 @@ function Create() {
     const [projectId, setProjectId] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
     const [projectName, setProjectName] = useState('');
-   ///createProject/<projectId>/<name>/<description>
     const handleCreateProject = () => {
         console.log(projectDescription)
         console.log(projectName)
@@ -26,7 +25,7 @@ function Create() {
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
-                console.log("Create Project successful") 
+                console.log("Create Project successful")
             }
         })
     };

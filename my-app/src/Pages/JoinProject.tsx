@@ -9,7 +9,7 @@ import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useParams, useLocation} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import LoginPage from './LoginPage';
 
@@ -25,17 +25,20 @@ function Join() {
     const handleChangeProjectId = (event: any) => {
         setProjectId(event.target.value)
     }
-    //joinProject/<userId>/<projectId></projectId>
+    const navigate = useNavigate();
     const handleJoinProject = () => {
         console.log("Login clicked")
         console.log(state.username)
+        let username = state.username
         console.log(projectId)
         const url = `http://localhost:5000/joinProject/${state.username}/${projectId}`;
         axios.post(url)
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
-                console.log("Join successful")
+                console.log("Join su")
+                const url = `/projects`
+                navigate(url, { state: { username: username}});
             }
         })
     }
