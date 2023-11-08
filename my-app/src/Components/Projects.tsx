@@ -7,13 +7,6 @@ interface LocationState {
     username: string;
 }
 
-
-
-import axios from 'axios';
-interface LocationState {
-    username: string;
-}
-
 function Projects(props: any){
 
     // const handleGetUserProject = () => {
@@ -54,8 +47,6 @@ function Projects(props: any){
     //     })
     // }
 
-    const location = useLocation()
-    const state = location.state as LocationState
     return (
         <Container sx={{marginBottom: '4rem'}}>
             {project}
