@@ -7,8 +7,8 @@ def createProject(projectId, name, description):
     projDb = client.SWELabProjectDB
     collection = projDb['Projects']
     projectDoc = Project(projectId, name, description)
-    projectDoc.HWSets['1'] = addHWSet(f"{name}:{projectId} HWSet1", 2**31 - 1)
-    projectDoc.HWSets['2'] = addHWSet(f"{name}:{projectId} HWSet2", 2**31 - 1)
+    projectDoc.HWSets['1'] = addHWSet(f"{name}:{projectId} HWSet1", 0, 2**31 - 1)
+    projectDoc.HWSets['2'] = addHWSet(f"{name}:{projectId} HWSet2", 0, 2**31 - 1)
     collection.insert_one(projectDoc.to_dict())
     client.close()
 
