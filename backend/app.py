@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from database.userDB import addNewUser, getExistingUser
-from database.projectDB import getAllProjects
+from database.userDB import addNewUser, getExistingUser, getUserProjectIds
+from database.projectDB import getAllProjects, getProjectsFromIds
 
 app = Flask(__name__)
 
@@ -25,5 +25,11 @@ def getProjects():
    projects = getAllProjects()
    return jsonify({'projects': projects})
 
+@app.route("/userProjects/<userId>", methods=['GET'])
+def getUserProjects(userId):
+   userProjectIds = getUserProjectIds(userId)
+   return jsonify({'projects': getProjectsFromIds(userProjectIds)})
+   
+
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=True)
