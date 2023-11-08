@@ -1,4 +1,4 @@
-import database as db
+import database.database as db
 from database.models.HWSet import HWSet
 
 def addHWSet(name, capacity):

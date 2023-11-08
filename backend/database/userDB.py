@@ -1,6 +1,6 @@
-import database as db
+import database.database as db
 from database.models.User import User
-import database.cipher
+import database.cipher as cipher
 
 def addNewUser(userId, password):
    try:
@@ -75,6 +75,7 @@ def leaveProject(userId, projectId):
       
    
 if __name__ == '__main__':
-   joinProject("cashel", 123)
-   print(getExistingUser("cashel", 123))
-   leaveProject("cashel", 123)
+   # addNewUser("hello", "hello")
+   joinProject("hello", 123)
+   # print(getExistingUser("cashel", 123))
+   # leaveProject("cashel", 123)
