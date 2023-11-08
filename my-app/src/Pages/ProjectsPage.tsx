@@ -8,11 +8,23 @@ import ReviewSection from '../Components/ReviewSection';
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
+import axios from 'axios';
+
+
 const ProjectsPage = () => {
+    const getProjects = () => {
+        console.log("Getting projects")
+        axios.get('http://localhost:5000/projects')
+        .then(function (res) {
+            console.log(res.data.projects);
+            return res.data.projects;
+        })
+    }
+    
     return (
        <Container>
             <Navbar/>
-            <Projects/>
+            <Projects projects={getProjects()}/>
        </Container>
     );
 };

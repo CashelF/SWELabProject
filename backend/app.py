@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from database.userDB import addNewUser, getExistingUser
-from database.projectDB import createProject
-from database.userDB import joinProject, leaveProject
+from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
+from database.projectDB import createProject, getAllProjects, getProjectsFromIds
 from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability
 
 app = Flask(__name__)
@@ -52,7 +51,16 @@ def checkOutAPI(HWSetId, qty):
 def queryAvailabilityAPI(HWSetId):
    return queryAvailability(HWSetId)
 
+@app.route("/projects", methods=['GET'])
+def getProjects():
+   projects = getAllProjects()
+   return jsonify({'projects': projects})
 
+@app.route("/userProjects/<userId>", methods=['GET'])
+def getUserProjects(userId):
+   userProjectIds = getUserProjectIds(userId)
+   return jsonify({'projects': getProjectsFromIds(userProjectIds)})
+   
 
 if __name__ == "__main__":
    app.run(debug=True)
