@@ -23,3 +23,15 @@ def getAllProjects():
         projects.append(proj.to_dict())
     client.close()
     return projects
+
+def getProjectsFromIds(projectIds):
+    client = db.get_database()
+    projDb = client.SWELabProjectDB
+    collection = projDb['Projects']
+    documents = collection.find({"id": {"$in": projectIds}})
+    projects = []
+    for doc in documents:
+        doc['_id'] = str(doc['_id'])
+        projects.append(doc)
+    client.close()
+    return projects
