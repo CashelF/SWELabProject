@@ -2,6 +2,7 @@ import { Button, styled, useTheme } from "@mui/material";
 import React from "react";
 
 interface CustomButtonProps {
+  onClick?: () => void;
   backgroundColor: string;
   color: string;
   buttonText: string;
@@ -11,6 +12,7 @@ interface CustomButtonProps {
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
+  onClick,
   backgroundColor,
   color,
   buttonText,
@@ -46,7 +48,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     },
   }));
 
-  return <StyledCustomButton>{buttonText}</StyledCustomButton>;
+  return <StyledCustomButton onClick={onClick}>{buttonText}</StyledCustomButton>;
 };
 
 export default CustomButton;

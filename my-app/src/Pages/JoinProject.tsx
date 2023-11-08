@@ -9,14 +9,38 @@ import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation} from 'react-router-dom';
+import axios from 'axios';
+import LoginPage from './LoginPage';
+
+interface LocationState {
+    username: string;
+}
+
 
 function Join() {
     const [projectId, setProjectId] = useState('');
-  
+    const location = useLocation()
+    const state = location.state as LocationState
+    const handleChangeProjectId = (event: any) => {
+        setProjectId(event.target.value)
+    }
+    //joinProject/<userId>/<projectId></projectId>
     const handleJoinProject = () => {
-      console.log(`Joining project with ID: ${projectId}`);
-    };
+        console.log("Login clicked")
+        console.log(state.username)
+        console.log(projectId)
+        const url = `http://localhost:5000/joinProject/${state.username}/${projectId}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Join successful")
+            }
+        })
+    }
+
+
   
     return (
         <Container
@@ -43,13 +67,14 @@ function Join() {
                         Join an Existing Project
                     </Typography>
 
-                    <TextField id="standard-basic" label="Project ID" variant="standard" sx={{
+                    <TextField id="standard-basic" label="Project ID" variant="standard"
+                        onChange={handleChangeProjectId}
+                    sx={{
                         input: {color: '#0F1B4C'},
                         label: {color: '#0F1B4C'},
                         '& .MuiInput-underline:before': { borderBottomColor: '#0F1B4C' }}}/>
                     <div>
-                        <Link to="/projects">
-                            <Button variant="contained" sx={{
+                            <Button variant="contained" onClick={handleJoinProject} sx={{
                                 bgcolor: '#0F1B4C',
                                 color: 'white',
                                 borderRadius: '12px',
@@ -61,13 +86,12 @@ function Join() {
                                 }
                             }}>Join
                             </Button>
-                        </Link>
                     </div>
                 </Stack>
       </Container>
     );
   }
-
+//<Link to="/projects">
 function JoinProject() {
     return (
         <Container>
