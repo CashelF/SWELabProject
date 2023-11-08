@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database.userDB import addNewUser, getExistingUser
+from database.projectDB import getAllProjects
 
 app = Flask(__name__)
 
@@ -18,6 +19,11 @@ def getUser(username, password):
       return jsonify({'success': True})
    else:
       return jsonify({'success': False})
+   
+@app.route("/projects", methods=['GET'])
+def getProjects():
+   projects = getAllProjects()
+   return jsonify({'projects': projects})
 
 if __name__ == "__main__":
     app.run(debug=True)
