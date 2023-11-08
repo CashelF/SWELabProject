@@ -16,29 +16,13 @@ const Footer = () => {
     },
   }));
 
-  const IconBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center",
-    },
-  }));
+  
 
-  const FooterLink = styled("span")(({ theme }) => ({
-    fontSize: "16px",
-    color: "#7A7A7E",
-    fontWeight: "300",
-    cursor: "pointer",
-    "&:hover": {
-      color: "#000",
-    },
-  }));
 
   return (
     <Box sx={{
-        bgcolor: '#E6F0FF',
-        py: 3
+        bgcolor: 'white',
+        py: 6,
     }}>
       <CustomContainer>
         <CustomContainer>
