@@ -1,5 +1,5 @@
 import database as db
-from models.Project import Project
+from backend.database.models.Project import Project
 
 def createProject(projectId, name, description, checkedOut):
     client = db.get_database()

@@ -1,5 +1,5 @@
 import database as db
-from models.HWSet import HWSet
+from database.models.HWSet import HWSet
 
 def addHWSet(name, capacity):
    client = db.get_database()
