@@ -27,7 +27,6 @@ def getExistingUser(userId, password):
             user = None
       
       client.close()
-      print(user)
       return user
    except Exception:
       print("Error in adding a new user")
@@ -76,4 +75,5 @@ def leaveProject(userId, projectId):
       
    
 if __name__ == '__main__':
+   print(getExistingUser("cashel", "123"))
    leaveProject("cashel", "123")
