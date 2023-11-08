@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import uuid
 from database.userDB import addNewUser, getExistingUser
 from database.projectDB import createProject
 from database.userDB import joinProject, leaveProject
+from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability
 
 app = Flask(__name__)
 
@@ -32,13 +34,24 @@ def leaveProjectAPI(userId, projectId):
    return jsonify({'success': True})
    
    
-@app.route("/createProject/<projectId>/<name>/<description>")
-def createProjectAPI(projectId, name, description):
-   createProject(projectId, name, description)
+@app.route("/createProject/<id>/name>/<description>")
+def createProjectAPI(id, name, description):
+   createProject(id, name, description)
    return jsonify({'success': True})
 
+@app.route("checkIn/<HWSetId>/<qty>")
+def checkInAPI(HWSetId, qty):
+   checkIn_HWSet(HWSetId, qty)
+   return jsonify({'success': True})
 
+@app.route("checkOut/<HWSetId>/<qty>")
+def checkOutAPI(HWSetId, qty):
+   checkOut_HWSet(HWSetId, qty)
+   return jsonify({'success': True})
 
+@app.route("queryAvailability/<HWSetId>")
+def queryAvailabilityAPI(HWSetId):
+   return queryAvailability(HWSetId)
 
 
 

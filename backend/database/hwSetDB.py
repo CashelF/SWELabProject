@@ -8,6 +8,7 @@ def addHWSet(name, capacity):
    HWSetDoc = HWSet(name, capacity)
    collection.insert_one(HWSetDoc.to_dict())
    client.close()
+   return HWSetDoc.id
    
 def getHWSet(HWSetId):
    client = db.get_database()

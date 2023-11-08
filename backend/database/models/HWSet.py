@@ -1,6 +1,8 @@
+import uuid
+
 class HWSet:
-    def __init__(self, id, name, capacity):
-        self.id = id
+    def __init__(self, name, capacity):
+        self.id = str(uuid.uuid4())
         self.name = name
         self.capacity = capacity
         self.availability = capacity
