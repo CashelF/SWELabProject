@@ -27,7 +27,6 @@ function Join() {
     const handleJoinProject = () => {
         console.log("Login clicked")
         console.log(username)
-        //let username = state.username
         console.log(projectId)
         const url = `http://localhost:5000/joinProject/${username}/${projectId}`;
         axios.post(url)

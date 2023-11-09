@@ -42,7 +42,7 @@ function LoginPage() {
             if (res.data.success === true) {
                 console.log("Login successful")
                 const url = `/homepage`
-                navigate(url, {state: {username}})
+                navigate(url)
                 
             }
         })
