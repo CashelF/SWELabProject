@@ -12,26 +12,29 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { useUser } from "../UserContext";
 
 function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false);
+    const {setUsername} = useUser();
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
       };
-    const [username, setUsername] = React.useState('');
+    const [username, newUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const handleChangePassword = (event: any) => {
         setPassword(event.target.value)
     }
 
     const handleChangeUsername = (event: any) => {
-        setUsername(event.target.value)
+        newUsername(event.target.value)
     }
 
     const navigate = useNavigate();
     const handleLogin = () => {
         console.log("Login clicked")
+        setUsername(username)
         const url = `http://localhost:5000/login/${username}/${password}`;
         axios.post(url)
         .then(res => {

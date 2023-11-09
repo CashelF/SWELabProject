@@ -12,33 +12,30 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import LoginPage from './LoginPage';
+import { useUser } from '../UserContext';
 import join_project_img from '../images/join_project_img.png'
 
-interface LocationState {
-    username: string;
-}
 
 function Join() {
     const [projectId, setProjectId] = useState('');
-    const location = useLocation()
-    const state = location.state as LocationState
+    const {username} = useUser();
     const handleChangeProjectId = (event: any) => {
         setProjectId(event.target.value)
     }
     const navigate = useNavigate();
     const handleJoinProject = () => {
         console.log("Login clicked")
-        console.log(state.username)
-        let username = state.username
+        console.log(username)
+        //let username = state.username
         console.log(projectId)
-        const url = `http://localhost:5000/joinProject/${state.username}/${projectId}`;
+        const url = `http://localhost:5000/joinProject/${username}/${projectId}`;
         axios.post(url)
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
                 console.log("Join su")
                 const url = `/projects`
-                navigate(url, { state: { username: username}});
+                navigate(url);
             }
         })
     }
