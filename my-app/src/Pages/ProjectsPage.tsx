@@ -7,14 +7,25 @@ import HowItWorks from '../Components/HowItWorks'
 import ReviewSection from '../Components/ReviewSection';
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
-import Projects from '../Components/Projects'
+import Projects from '../Components/Projects';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
+interface LocationState {
+    username: string;
+}
 
 
 const ProjectsPage = () => {
+
+    const location = useLocation()
+    const state = location.state as LocationState
+
     const getProjects = () => {
-        console.log("Getting projects")
-        axios.get('http://localhost:5000/projects')
+        let username = state.username
+        console.log(username)
+        const url = `http://localhost:5000/userProjects/${username}`;
+        axios.get(url)
         .then(function (res) {
             console.log(res.data.projects);
             return res.data.projects;
@@ -24,7 +35,7 @@ const ProjectsPage = () => {
     return (
        <Container>
             <Navbar/>
-            <Projects projects={getProjects()}/>
+            <Projects projects={getProjects()}/> 
        </Container>
     );
 };

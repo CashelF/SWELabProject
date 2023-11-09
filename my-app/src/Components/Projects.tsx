@@ -26,10 +26,11 @@ function Projects(props: any){
 
     const location = useLocation()
     const state = location.state as LocationState
-    const project = props.projects.map((proj: any) => {
-        console.log(props.projects)
-        return <Project name={proj['name']} projectID={proj['id']} description={proj['description']} usedSet1={0} usedSet2={0} capacity={100}/>
-    });
+    
+    // const project = props.projects.map((proj: any) => {
+    //     console.log(props.projects)
+    //     return <Project name={proj['name']} projectID={proj['id']} description={proj['description']} usedSet1={0} usedSet2={0} capacity={100}/>
+    // });
     
 
     // const handleGetUserProject = () => {
@@ -49,7 +50,7 @@ function Projects(props: any){
 
     return (
         <Container sx={{marginBottom: '4rem'}}>
-            {project}
+            <h1>CRY</h1>
         </Container>
     );
 };
