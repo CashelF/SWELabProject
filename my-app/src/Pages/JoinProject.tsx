@@ -40,7 +40,7 @@ function Join() {
         })
     }
 
-
+    
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
@@ -129,7 +129,9 @@ function Join() {
 function JoinProject() {
     return (
         <>
+        <Container>
             <Navbar/>
+        </Container>
             <Join />
        </>
     );
