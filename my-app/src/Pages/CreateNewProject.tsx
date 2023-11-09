@@ -51,9 +51,7 @@ function Create() {
         }}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Box sx={{ bgcolor: '#E6F0FF', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                <Stack sx={{
-                    paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},
-                }}>
+                <Stack>
                 <Box
                         component="img"
                         sx={{

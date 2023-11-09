@@ -12,6 +12,11 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = (props) => {
+
+  const handleLeave = () => {
+    //function should remove user from project and remove project from My Project
+  };
+
   return (
     <Container
       sx={{
@@ -43,6 +48,9 @@ const Project: React.FC<ProjectProps> = (props) => {
         </Typography>
       </Stack>
       <HardwareSet usedSet1={props.usedSet1} usedSet2={props.usedSet2} capacity={props.capacity} />
+      <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleLeave}>
+          Leave
+      </Button>
     </Container>
   );
 };
