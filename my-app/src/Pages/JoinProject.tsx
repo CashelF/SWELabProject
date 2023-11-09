@@ -32,14 +32,14 @@ function Join() {
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
-                console.log("Join su")
+                console.log("Join successful")
                 const url = `/projects`
                 navigate(url);
             }
         })
     }
 
-    
+
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
