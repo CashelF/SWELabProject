@@ -7,6 +7,7 @@ import create_project_img from '../images/create_project_img.png'
 import Footer from '../Components/Footer';
 import { Height } from '@mui/icons-material';
 import axios from 'axios';
+import { useUser } from '../UserContext';
 
 
 
@@ -14,10 +15,12 @@ function Create() {
     const [projectId, setProjectId] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
     const [projectName, setProjectName] = useState('');
+    const {username} = useUser();
     const handleCreateProject = () => {
         console.log(projectDescription)
         console.log(projectName)
         console.log(projectId)
+        console.log(username)
         const url = `http://localhost:5000/createProject/${projectId}/${projectName}/${projectDescription}`;
         axios.post(url)
         .then(res => {
