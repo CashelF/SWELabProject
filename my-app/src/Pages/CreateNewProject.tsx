@@ -51,9 +51,7 @@ function Create() {
         }}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Box sx={{ bgcolor: '#E6F0FF', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                <Stack sx={{
-                    paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},
-                }}>
+                <Stack sx={{paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},}}>
                 <Box
                         component="img"
                         sx={{
@@ -145,19 +143,19 @@ function Create() {
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <Button variant="contained" onClick={handleCreateProject} sx={{
-                            bgcolor: '#0F1B4C',
-                            color: 'white',
-                            marginTop: '25px',
-                            paddingTop: '10px',
-                            paddingBottom: '10px',
-                            fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
-                            borderRadius: '8px',
-                            '&:hover': {
-                                backgroundColor: '#7398F7',
-                                boxShadow: 'none',
-                            }
-                        }}>Create</Button>
+                            <Button variant="contained" onClick={handleCreateProject} sx={{
+                                bgcolor: '#0F1B4C',
+                                color: 'white',
+                                marginTop: '25px',
+                                paddingTop: '10px',
+                                paddingBottom: '10px',
+                                fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
+                                borderRadius: '8px',
+                                '&:hover': {
+                                    backgroundColor: '#7398F7',
+                                    boxShadow: 'none',
+                                }
+                            }}>Create</Button>
                 </Stack>
             </Box>
           </Grid>
@@ -174,7 +172,6 @@ function CreateNewProject() {
         </Container>
             <Create/>
         </>
-       
     );
 }
 export default CreateNewProject;
