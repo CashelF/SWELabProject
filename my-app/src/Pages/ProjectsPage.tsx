@@ -10,19 +10,16 @@ import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects';
 import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { useUser } from '../UserContext';
 
-interface LocationState {
-    username: string;
-}
 
 
 const ProjectsPage = () => {
 
-    const location = useLocation()
-    const state = location.state as LocationState
+    const {username} = useUser();
 
     const getProjects = () => {
-        let username = state.username
+        
         console.log(username)
         const url = `http://localhost:5000/userProjects/${username}`;
         axios.get(url)

@@ -8,9 +8,7 @@ import Footer from '../Components/Footer';
 import { Height } from '@mui/icons-material';
 import axios from 'axios';
 
-interface LocationState {
-    username: string;
-}
+
 
 function Create() {
     const [projectId, setProjectId] = useState('');
@@ -41,8 +39,7 @@ function Create() {
     };
 
 
-    const location = useLocation()
-    const state = location.state as LocationState
+   
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
@@ -169,9 +166,12 @@ function Create() {
 function CreateNewProject() {
     return (
         <>
+        <Container>
             <Navbar/>
+        </Container>
             <Create/>
-       </>
+        </>
+       
     );
 }
 export default CreateNewProject;
