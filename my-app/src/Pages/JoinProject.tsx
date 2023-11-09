@@ -133,7 +133,7 @@ function JoinProject() {
             <Navbar/>
         </Container>
             <Join />
-        </>
+       </>
     );
 }
 

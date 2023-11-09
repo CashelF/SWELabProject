@@ -54,7 +54,7 @@ function Create() {
         }}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Box sx={{ bgcolor: '#E6F0FF', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                <Stack>
+                <Stack sx={{paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},}}>
                 <Box
                         component="img"
                         sx={{
@@ -146,9 +146,7 @@ function Create() {
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <div>
-                            <Link to="/projects">
-                                <Button variant="contained" sx={{
+                            <Button variant="contained" onClick={handleCreateProject} sx={{
                                 bgcolor: '#0F1B4C',
                                 color: 'white',
                                 marginTop: '25px',
@@ -159,10 +157,8 @@ function Create() {
                                 '&:hover': {
                                     backgroundColor: '#7398F7',
                                     boxShadow: 'none',
-                                }}}>Create</Button>   
-                            </Link>
-                        </div>
-                        
+                                }
+                            }}>Create</Button>
                 </Stack>
             </Box>
           </Grid>
