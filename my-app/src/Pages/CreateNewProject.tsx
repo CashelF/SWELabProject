@@ -112,19 +112,23 @@ function Create() {
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <Button variant="contained" sx={{
-                            bgcolor: '#0F1B4C',
-                            color: 'white',
-                            marginTop: '25px',
-                            paddingTop: '10px',
-                            paddingBottom: '10px',
-                            fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
-                            borderRadius: '8px',
-                            '&:hover': {
-                                backgroundColor: '#7398F7',
-                                boxShadow: 'none',
-                            }
-                        }}>Create</Button>
+                        <div>
+                            <Link to="/projects">
+                                <Button variant="contained" sx={{
+                                bgcolor: '#0F1B4C',
+                                color: 'white',
+                                marginTop: '25px',
+                                paddingTop: '10px',
+                                paddingBottom: '10px',
+                                fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
+                                borderRadius: '8px',
+                                '&:hover': {
+                                    backgroundColor: '#7398F7',
+                                    boxShadow: 'none',
+                                }}}>Create</Button>   
+                            </Link>
+                        </div>
+                        
                 </Stack>
             </Box>
           </Grid>
