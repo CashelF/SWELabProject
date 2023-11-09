@@ -10,14 +10,19 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../images/logoImg.png";
 import { Container, styled, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import CustomButton from "./CustomButton";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { Home } from "@mui/icons-material";
 
 interface MobileMenuState {
   left: boolean;
 }
 
-const Navbar: React.FC = () => {
+interface HeroProps {
+  user: string;
+}
+
+
+const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState<MobileMenuState>({
     left: false,
   });
@@ -32,6 +37,8 @@ const Navbar: React.FC = () => {
 
     setMobileMenu({ ...mobileMenu, [anchor]: open });
   };
+
+  const navigate = useNavigate();
 
   const list = (anchor: string) => (
     <Box
@@ -57,7 +64,7 @@ const Navbar: React.FC = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/create-project" style={{textDecoration:'none'}}>
+          <Link to="/create-project"  style={{textDecoration:'none'}}>
           <ListItemButton>
             <ListItemIcon>
               <Typography sx={{

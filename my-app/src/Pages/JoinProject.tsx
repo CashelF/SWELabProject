@@ -9,15 +9,41 @@ import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import LoginPage from './LoginPage';
 import join_project_img from '../images/join_project_img.png'
+
+interface LocationState {
+    username: string;
+}
 
 function Join() {
     const [projectId, setProjectId] = useState('');
-  
+    const location = useLocation()
+    const state = location.state as LocationState
+    const handleChangeProjectId = (event: any) => {
+        setProjectId(event.target.value)
+    }
+    const navigate = useNavigate();
     const handleJoinProject = () => {
-      console.log(`Joining project with ID: ${projectId}`);
-    };
+        console.log("Login clicked")
+        console.log(state.username)
+        let username = state.username
+        console.log(projectId)
+        const url = `http://localhost:5000/joinProject/${state.username}/${projectId}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Join su")
+                const url = `/projects`
+                navigate(url, { state: { username: username}});
+            }
+        })
+    }
+
+
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
@@ -48,8 +74,8 @@ function Join() {
                         fontWeight: '800',
                     }}>
                         Join an Existing Project
-                        </Typography>
-                        <Typography variant="h5" sx={{
+                    </Typography>
+                    <Typography variant="h5" onChange={handleChangeProjectId} sx={{
                             color: '#757575',
                             fontSize: {xl: '14px', lg: '14px', md: '12px', sm: '12px', xs: '12px'},
                             fontWeight: '700',
@@ -66,9 +92,9 @@ function Join() {
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <div>
-                            <Link to="/projects">
-                                <Button variant="contained" sx={{
+                    <div>
+                        <Link to="/projects">
+                            <Button variant="contained" onClick={handleJoinProject} sx={{
                                 bgcolor: '#0F1B4C',
                                 color: 'white',
                                 marginTop: '25px',
@@ -79,11 +105,12 @@ function Join() {
                                 '&:hover': {
                                     backgroundColor: '#7398F7',
                                     boxShadow: 'none',
-                                }}}>Join</Button>   
-                            </Link>
-                        </div>
-                        
-                </Stack>
+                                }
+                            }}>Join
+                            </Button>
+                        </Link>
+                    </div>
+                    </Stack>
             </Box>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -105,7 +132,7 @@ function Join() {
       </div>
     );
   }
-
+//<Link to="/projects">
 function JoinProject() {
     return (
         <Container>
