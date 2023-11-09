@@ -90,9 +90,7 @@ function Join() {
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <div>
-                            <Link to="/projects">
-                                <Button variant="contained" sx={{
+                            <Button variant="contained" onClick={handleJoinProject} sx={{
                                 bgcolor: '#0F1B4C',
                                 color: 'white',
                                 marginTop: '25px',
@@ -103,11 +101,10 @@ function Join() {
                                 '&:hover': {
                                     backgroundColor: '#7398F7',
                                     boxShadow: 'none',
-                                }}}>Join</Button>   
-                            </Link>
-                        </div>
-                        
-                </Stack>
+                                }
+                            }}>Join
+                            </Button>
+                    </Stack>
             </Box>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -132,10 +129,10 @@ function Join() {
 //<Link to="/projects">
 function JoinProject() {
     return (
-        <Container>
+        <>
             <Navbar/>
             <Join />
-       </Container>
+       </>
     );
 }
 
