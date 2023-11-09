@@ -9,12 +9,10 @@ import CustomButton from './CustomButton';
 import HowItWorks from './HowItWorks';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-interface HeroProps {
-  user: string;
-}
 
 
-const Hero:React.FC<HeroProps> = ({user}) => {
+
+const Hero = () => {
     const CustomBox = styled(Box)(({ theme }) => ({
         display: "flex",
         justifyContent: "center",
@@ -45,13 +43,11 @@ const Hero:React.FC<HeroProps> = ({user}) => {
 
       const navigate = useNavigate();
       const goToJoinPage = () => {
-        console.log(user)
-        navigate("/join-project", {state: {username: user}})
+        navigate("/join-project")
       };
 
       const goToCreateProjectPage = () => {
-        console.log(user)
-        navigate("/create-project", {state: {username: user}})
+        navigate("/create-project")
       };
     
       return (
