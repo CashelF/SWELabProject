@@ -7,9 +7,14 @@ import hero_img from '../images/hero_img.png'
 import { ThemeContext } from '@emotion/react';
 import CustomButton from './CustomButton';
 import HowItWorks from './HowItWorks';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-const Hero = () => {
+interface HeroProps {
+  user: string;
+}
+
+
+const Hero:React.FC<HeroProps> = ({user}) => {
     const CustomBox = styled(Box)(({ theme }) => ({
         display: "flex",
         justifyContent: "center",
@@ -37,11 +42,22 @@ const Hero = () => {
         gap: "20px",
 
       }));
+
+      const navigate = useNavigate();
+      const goToJoinPage = () => {
+        console.log(user)
+        navigate("/join-project", {state: {username: user}})
+      };
+
+      const goToCreateProjectPage = () => {
+        console.log(user)
+        navigate("/create-project", {state: {username: user}})
+      };
     
       return (
         <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
           <Container>
-            <Navbar />
+            <Navbar/>
             <CustomBox>
               <Box sx={{ flex: "1" }}>
                 <Typography
@@ -69,22 +85,20 @@ const Hero = () => {
                   sx={{
                     display: 'flex',
                     flexDirection: {xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row'}}}>
-                  <Link to="/create-project" style={{textDecoration:'none'}}>
                   <CustomButton
+                    onClick={goToCreateProjectPage}
                     backgroundColor="#0F1B4C"
                     color="#fff"
                     buttonText="Create New Project"
                     heroBtn={true}
                   />
-                  </Link>
-                  <Link to="/join-project" style={{textDecoration:'none'}}>
                   <CustomButton
+                    onClick={goToJoinPage}
                     backgroundColor="#0F1B4C"
                     color="#fff"
                     buttonText="Join Project"
                     heroBtn={true}
                   />
-                  </Link>
                 </ProjButtonBox>
               </Box>
     

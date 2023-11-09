@@ -28,8 +28,9 @@ def getExistingUser(userId, password):
       
       client.close()
       return user
-   except Exception:
-      print("Error in adding a new user")
+   except Exception as ex:
+      template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+      print(template.format(type(ex).__name__, ex.args))
       
 def joinProject(userId, projectId):
    client = db.get_database()
@@ -72,6 +73,23 @@ def leaveProject(userId, projectId):
    user.removeProject(projectId)
    collection.update_one({"userId": user.userId}, {"$set": {"projects": user.projects}})
    client.close()
+   
+def getUserProjectIds(userId):
+   try:
+      client = db.get_database()
+      collection = client['SWELabProjectDB']['Users']
+      userDoc = collection.find_one({"userId": userId})
+      projIds = []
+      
+      if userDoc:
+         user = User.from_dict(userDoc)
+         projIds = user.projects
+      
+      client.close()
+      return projIds
+   except Exception as ex:
+      template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+      print(template.format(type(ex).__name__, ex.args))
       
    
 if __name__ == '__main__':

@@ -9,10 +9,9 @@ import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-
 
 function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -22,7 +21,6 @@ function LoginPage() {
       };
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
     const handleChangePassword = (event: any) => {
         setPassword(event.target.value)
     }
@@ -32,7 +30,6 @@ function LoginPage() {
     }
 
     const navigate = useNavigate();
-
     const handleLogin = () => {
         console.log("Login clicked")
         const url = `http://localhost:5000/login/${username}/${password}`;
@@ -41,7 +38,9 @@ function LoginPage() {
             console.log(res.data);
             if (res.data.success === true) {
                 console.log("Login successful")
-                navigate('/homepage')
+                const url = `/homepage`
+                navigate(url, {state: {username}})
+                
             }
         })
     }

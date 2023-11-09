@@ -2,17 +2,47 @@ import React from 'react'
 import { Container, Button, Typography, Grid, Box, Stack, TextField} from "@mui/material";
 import Navbar from '../Components/Navbar';
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate} from 'react-router-dom';
 import create_project_img from '../images/create_project_img.png'
 import Footer from '../Components/Footer';
 import { Height } from '@mui/icons-material';
+import axios from 'axios';
+
+interface LocationState {
+    username: string;
+}
 
 function Create() {
     const [projectId, setProjectId] = useState('');
-  
-    const handleJoinProject = () => {
-      console.log(`Joining project with ID: ${projectId}`);
+    const [projectDescription, setProjectDescription] = useState('');
+    const [projectName, setProjectName] = useState('');
+    const handleCreateProject = () => {
+        console.log(projectDescription)
+        console.log(projectName)
+        console.log(projectId)
+        const url = `http://localhost:5000/createProject/${projectId}/${projectName}/${projectDescription}`;
+        axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Create Project successful")
+            }
+        })
     };
+
+    const updateProjectName = (event: any) => {
+        setProjectName(event.target.value)
+    };
+    const updateProjectId = (event: any) => {
+        setProjectId(event.target.value)
+    };
+    const updateProjectDescription = (event: any) => {
+        setProjectDescription(event.target.value)
+    };
+
+
+    const location = useLocation()
+    const state = location.state as LocationState
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
@@ -74,6 +104,7 @@ function Create() {
                             id="filled-hidden-label-normal"
                             variant="filled"
                             label="Enter the Project Name"
+                            onChange={updateProjectName}
                             sx={{
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
@@ -90,6 +121,7 @@ function Create() {
                             hiddenLabel
                             id="filled-hidden-label-normal"
                             variant="filled"
+                            onChange={updateProjectDescription}
                             label="Enter the Project Description"
                             sx={{
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
@@ -108,11 +140,12 @@ function Create() {
                             id="filled-hidden-label-normal"
                             variant="filled"
                             label="Enter the Project ID"
+                            onChange={updateProjectId}
                             sx={{
                                 '& .MuiInput-underline:before': { borderBottomColor: '#ffffff50' }
                             }}
                         />
-                        <Button variant="contained" sx={{
+                        <Button variant="contained" onClick={handleCreateProject} sx={{
                             bgcolor: '#0F1B4C',
                             color: 'white',
                             marginTop: '25px',

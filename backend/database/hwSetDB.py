@@ -1,13 +1,14 @@
 import database.database as db
 from database.models.HWSet import HWSet
 
-def addHWSet(name, capacity):
+def addHWSet(name, availability, capacity):
    client = db.get_database()
    projDb = client.SWELabProjectDB
    collection = projDb.HardwareSets
-   HWSetDoc = HWSet(name, capacity)
+   HWSetDoc = HWSet(name, availability, capacity)
    collection.insert_one(HWSetDoc.to_dict())
    client.close()
+   return HWSetDoc.id
    
 def getHWSet(HWSetId):
    client = db.get_database()

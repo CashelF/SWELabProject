@@ -6,10 +6,20 @@ import Hero from '../Components/Hero';
 import HowItWorks from '../Components/HowItWorks'
 import ReviewSection from '../Components/ReviewSection';
 import Footer from '../Components/Footer'
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation} from 'react-router-dom'
+
+interface LocationState {
+    username: string;
+}
+
 const LandingPage = () => {
+   
+    const location = useLocation()
+    const state = location.state as LocationState
+
     return (
         <>
-        <Hero/>
+        <Hero user={state.username}/>
         <ReviewSection/>
         <HowItWorks/>
         <Footer/>
