@@ -22,11 +22,11 @@ function Projects({projects}: {projects: any[]}){
     //     })
     // }
 
-    const printProjects = () => {
-        console.log(projects)
-    };
+    const currProjects = [];
 
-        // Function to fetch availability for each project
+     
+
+       // Function to fetch availability for each project
         const fetchAvailability = async (hwSet1Id: string) => {
             console.log(hwSet1Id)
             try {
@@ -45,6 +45,9 @@ function Projects({projects}: {projects: any[]}){
                 return 0;
             }
         };
+    const printProjects = () => {
+        console.log("cry")
+    }
 
     const projectItems = projects.map((proj: any, index: number) => {
         let hwSet1Id = proj.hwSets[1]
@@ -52,19 +55,25 @@ function Projects({projects}: {projects: any[]}){
         console.log(hwSet1Id)
         let availability2 = 0
         let capacity = 0
-        let availability1 = fetchAvailability(hwSet1Id)
+        //let availability1 = fetchAvailability(hwSet1Id)
+        let availability1 = 0
         console.log(availability1)
         //hardwareset1 availability call
-        // const url = `http://localhost:5000/queryAvailability/${hwSet1Id}`;
-        // axios.post(url)
-        // .then(res => {
-        //     console.log(res.data);
-        //     if (res.data.success === true) {
-        //         availability1 = res.data
-        //         console.log("Join su")
-        //         const url = `/projects`
-        //     }
-        // })
+        const url = `http://localhost:5000/queryAvailability/${hwSet1Id}`;
+        axios.get(url)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.success === true) {
+                    let availability1 = res.data;
+                    console.log("Availability 1");
+                    console.log(availability1);
+                }
+            })
+    .catch(error => {
+        console.error('There was an error!', error);
+    });
+
+        })
         // hardwareset2 availability call
         // const url2 = `http://localhost:5000/queryAvailability/${hwSet2Id}`;
         // axios.post(url)
@@ -75,9 +84,8 @@ function Projects({projects}: {projects: any[]}){
         //         const url = `/projects`
         //     }
         // })
-        return <Project name={proj.name} projectID={proj.id} description={proj.description} usedSet1={0} usedSet2={0} capacity={100} />
+        //return <Project name={proj.name} projectID={proj.id} description={proj.description} usedSet1={0} usedSet2={0} capacity={100} />
         // Replace with your actual project component or rendering logic
-    });
 
     // const project = props.projects.map((proj: any) => {
     //      console.log(props.projects)
@@ -106,7 +114,6 @@ function Projects({projects}: {projects: any[]}){
             <Button onClick={printProjects}>
                 PAAAAAAAAIIIIIN
             </Button>
-            {projectItems}
         </Container>
     );
 };
