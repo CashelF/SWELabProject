@@ -16,7 +16,8 @@ class User:
         }
         
     def addProject(self, projectId):
-        self.projects.append(projectId)
+        if projectId not in self.projects:
+            self.projects.append(projectId)
         
     def removeProject(self, projectId):
         self.projects.remove(projectId)

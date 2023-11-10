@@ -10,6 +10,7 @@ import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
+import join_project_img from '../images/join_project_img.png'
 import axios from 'axios';
 import LoginPage from './LoginPage';
 import { useUser } from '../UserContext';
@@ -71,7 +72,7 @@ function Join() {
                     }}>
                         Join an Existing Project
                     </Typography>
-                    <Typography variant="h5" onChange={handleChangeProjectId} sx={{
+                    <Typography variant="h5" sx={{
                             color: '#757575',
                             fontSize: {xl: '14px', lg: '14px', md: '12px', sm: '12px', xs: '12px'},
                             fontWeight: '700',
@@ -80,6 +81,7 @@ function Join() {
                             Project ID
                         </Typography>
                         <TextField
+                            onChange={handleChangeProjectId}
                             hiddenLabel
                             id="filled-hidden-label-normal"
                             variant="filled"
