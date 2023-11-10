@@ -14,7 +14,6 @@ import join_project_img from '../images/join_project_img.png'
 import axios from 'axios';
 import LoginPage from './LoginPage';
 import { useUser } from '../UserContext';
-import join_project_img from '../images/join_project_img.png'
 
 
 function Join() {
