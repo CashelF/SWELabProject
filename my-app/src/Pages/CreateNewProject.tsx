@@ -16,6 +16,7 @@ function Create() {
     const [projectDescription, setProjectDescription] = useState('');
     const [projectName, setProjectName] = useState('');
     const {username} = useUser();
+    const navigate = useNavigate();
     const handleCreateProject = () => {
         console.log(projectDescription)
         console.log(projectName)
@@ -27,6 +28,8 @@ function Create() {
             console.log(res.data);
             if (res.data.success === true) {
                 console.log("Create Project successful")
+                const url = `/projects`
+                navigate(url);
             }
         })
     };
