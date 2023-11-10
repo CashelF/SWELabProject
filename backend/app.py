@@ -29,6 +29,7 @@ def joinProjectAPI(userId, projectId):
 @app.route("/leaveProject/<userId>/<projectId>", methods=['POST'])
 def leaveProjectAPI(userId, projectId):
    leaveProject(userId, projectId)
+   # DELETE THE 2 HWSETS
    return jsonify({'success': True})
    
    
