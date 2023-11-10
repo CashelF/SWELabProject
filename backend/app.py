@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
 from database.projectDB import createProject, getAllProjects, getProjectsFromIds
-from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability
+from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability, getHWSet
 
 app = Flask(__name__)
 
@@ -60,6 +60,11 @@ def getProjects():
 def getUserProjects(userId):
    userProjectIds = getUserProjectIds(userId)
    return jsonify({'projects': getProjectsFromIds(userProjectIds)})
+
+@app.route("/globalHWSets", methods=['GET'])
+def getGlobalHWSets():
+   globalHWSets = {'1' : getHWSet(1), '2' : getHWSet(2)}
+   return jsonify({'HWSets': globalHWSets})
    
 
 if __name__ == "__main__":

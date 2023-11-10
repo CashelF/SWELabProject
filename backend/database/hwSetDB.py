@@ -14,9 +14,10 @@ def getHWSet(HWSetId):
    client = db.get_database()
    projDb = client.SWELabProjectDB
    collection = projDb.HardwareSets
-   document = collection.find_one(HWSetId)
+   document = collection.find_one({"id": HWSetId})
+   hwSet = HWSet.from_dict(document)
    client.close()
-   return document
+   return hwSet.to_dict()
 
 def checkIn_HWSet(HWSetId, qty):
    client = db.get_database()
