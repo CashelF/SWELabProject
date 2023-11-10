@@ -1,6 +1,8 @@
 import React from 'react';
 import { Typography, Button, Container, TextField, Stack } from '@mui/material';
 import HardwareSet from './HardwareSet';
+import { useUser } from '../UserContext';
+import axios from 'axios';
 
 interface ProjectProps {
   name: string;
@@ -12,9 +14,19 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = (props) => {
-
+  const {username} = useUser();
   const handleLeave = () => {
-    //function should remove user from project and remove project from My Project
+    console.log("Join clicked")
+    console.log(username)
+    console.log(props.projectID)
+    const url = `http://localhost:5000/leaveProject/${username}/${props.projectID}`;
+    axios.post(url)
+    .then(res => {
+      console.log(res.data);
+      if (res.data.success === true) {
+          console.log("Left project")
+      }
+    })
   };
 
   return (
