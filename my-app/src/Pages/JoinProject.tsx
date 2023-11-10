@@ -16,8 +16,6 @@ import LoginPage from './LoginPage';
 import { useUser } from '../UserContext';
 
 
-
-
 function Join() {
     const [projectId, setProjectId] = useState('');
     const {username} = useUser();
