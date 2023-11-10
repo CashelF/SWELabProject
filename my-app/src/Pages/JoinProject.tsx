@@ -14,7 +14,6 @@ import join_project_img from '../images/join_project_img.png'
 import axios from 'axios';
 import LoginPage from './LoginPage';
 import { useUser } from '../UserContext';
-import join_project_img from '../images/join_project_img.png'
 
 
 function Join() {
@@ -25,7 +24,7 @@ function Join() {
     }
     const navigate = useNavigate();
     const handleJoinProject = () => {
-        console.log("Login clicked")
+        console.log("Join clicked")
         console.log(username)
         console.log(projectId)
         const url = `http://localhost:5000/joinProject/${username}/${projectId}`;
