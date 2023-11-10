@@ -22,7 +22,7 @@ function Create() {
         console.log(projectName)
         console.log(projectId)
         console.log(username)
-        const url = `http://localhost:5000/createProject/${projectId}/${projectName}/${projectDescription}`;
+        const url = `http://localhost:5000/createProject/${projectId}/${projectName}/${projectDescription}/${username}`;
         axios.post(url)
         .then(res => {
             console.log(res.data);
