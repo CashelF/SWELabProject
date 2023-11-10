@@ -9,7 +9,7 @@ class HWSet:
         
     @classmethod
     def from_dict(cls, data):
-        return cls(data['id'], data['name'], data['availability'], data['capacity'])
+        return cls(data['name'], data['availability'], data['capacity'])
         
     def to_dict(self):
         return { 
