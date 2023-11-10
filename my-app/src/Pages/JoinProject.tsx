@@ -10,6 +10,7 @@ import Navbar from '../Components/Navbar';
 import Projects from '../Components/Projects'
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
+import join_project_img from '../images/join_project_img.png'
 import axios from 'axios';
 import LoginPage from './LoginPage';
 import { useUser } from '../UserContext';
