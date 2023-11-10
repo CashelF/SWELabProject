@@ -3,7 +3,7 @@ import { Container, Button, Typography, Grid, Box, Stack, TextField} from "@mui/
 import Navbar from '../Components/Navbar';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate} from 'react-router-dom';
-import create_project_img from '../images/create_project_img.png'
+import create_project_img from '../images/create_new_proj_img.png'
 import Footer from '../Components/Footer';
 import { Height } from '@mui/icons-material';
 import axios from 'axios';
@@ -51,7 +51,7 @@ function Create() {
         }}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Box sx={{ bgcolor: '#E6F0FF', height: '100%', display:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                <Stack sx={{paddingLeft: {md: '2rem', sm: '2rem', xs: '2rem'},}}>
+                <Stack>
                 <Box
                         component="img"
                         sx={{
@@ -169,8 +169,9 @@ function CreateNewProject() {
         <>
         <Container>
             <Navbar/>
-        </Container>
+        
             <Create/>
+            </Container>
         </>
     );
 }

@@ -12,6 +12,8 @@ import { Container, styled, Drawer, List, ListItem, ListItemButton, ListItemIcon
 import CustomButton from "./CustomButton";
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { Home } from "@mui/icons-material";
+import { useUser } from "../UserContext";
+import profile_icon from '../images/profile_icon.png'
 
 interface MobileMenuState {
   left: boolean;
@@ -23,6 +25,7 @@ interface HeroProps {
 
 
 const Navbar = () => {
+  const {username} = useUser();
   const [mobileMenu, setMobileMenu] = useState<MobileMenuState>({
     left: false,
   });
@@ -203,10 +206,20 @@ const Navbar = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "right",
           gap: "1rem",
         }}
       >
+
+        <Box component="img"
+            sx={{
+                height: '1.5rem',
+                width: '1.5rem',
+                marginRight: '-0.5rem',
+            }}
+                src={profile_icon}
+        />
+        <p>{username}</p>
         <Link to="/" style={{textDecoration:'none'}}>
         <CustomButton
           backgroundColor="#0F1B4C"
