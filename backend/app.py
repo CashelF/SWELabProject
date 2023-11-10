@@ -23,7 +23,7 @@ def getUser(username, password):
    
 @app.route("/joinProject/<userId>/<projectId>", methods=['POST'])
 def joinProjectAPI(userId, projectId):
-   joinProject(userId, int(projectId))
+   joinProject(userId, projectId)
    return jsonify({'success': True})
 
 @app.route("/leaveProject/<userId>/<projectId>", methods=['POST'])
