@@ -71,7 +71,7 @@ function Join() {
                     }}>
                         Join an Existing Project
                     </Typography>
-                    <Typography variant="h5"  sx={{
+                    <Typography variant="h5" sx={{
                             color: '#757575',
                             fontSize: {xl: '14px', lg: '14px', md: '12px', sm: '12px', xs: '12px'},
                             fontWeight: '700',
