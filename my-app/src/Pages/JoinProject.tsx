@@ -24,7 +24,7 @@ function Join() {
     }
     const navigate = useNavigate();
     const handleJoinProject = () => {
-        console.log("Login clicked")
+        console.log("Join clicked")
         console.log(username)
         console.log(projectId)
         const url = `http://localhost:5000/joinProject/${username}/${projectId}`;
