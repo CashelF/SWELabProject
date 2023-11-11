@@ -32,9 +32,10 @@ def leaveProjectAPI(userId, projectId):
    return jsonify({'success': True})
    
    
-@app.route("/createProject/<id>/<name>/<description>", methods=['POST'])
-def createProjectAPI(id, name, description):
+@app.route("/createProject/<id>/<name>/<description>/<userId>", methods=['POST'])
+def createProjectAPI(id, name, description, userId):
    createProject(id, name, description)
+   joinProject(userId, id)
    return jsonify({'success': True})
 
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])

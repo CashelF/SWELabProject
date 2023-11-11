@@ -12,19 +12,25 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate
 import axios from 'axios';
 import { useUser } from '../UserContext';
 
+export const useProjectsState = () => {
+    const [projects, setProjects] = useState([]);
+    return { projects, setProjects };
+  };
 
 
 const ProjectsPage = () => {
 
     const {username} = useUser();
-    const [projects, setProjects] = useState([]);
+    //const [projects, setProjects] = useState([]);
+    const { projects, setProjects } = useProjectsState();
+    
 
 
     useEffect(() => {
-        const getProjects = () => {
+        const getProjects = async () => {
             console.log(username);
             const url = `http://localhost:5000/userProjects/${username}`;
-            axios.get(url)
+            const res = await axios.get(url)
             .then(function (res) {
                 console.log(res.data.projects);
                 setProjects(Array.isArray(res.data.projects) ? res.data.projects : []);
@@ -38,7 +44,7 @@ const ProjectsPage = () => {
         if (username) {
             getProjects();
         }
-    }, [username]);
+    }, [username, projects]);
 
     // const getProjects = () => {
         

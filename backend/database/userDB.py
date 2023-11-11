@@ -63,7 +63,7 @@ def leaveProject(userId, projectId):
       client.close()
       return
     
-   # Add project to user profile
+   # Leave project to user profile
    collection = projDb['Users']
    if not collection.find_one({'userId': userId}):
       print("User does not exist")
