@@ -24,12 +24,18 @@ function HardwareSet(props: HardwareSetProps) {
     if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity) {
       setAvailability1(availability1 + quantityToAdd);
     }
+    else {
+      alert("ERROR: invalid quantity");
+    }
   };
 
   const handleCheckIn2 = () => {
     const quantityToAdd = parseInt(inputValue, 10);
     if (!isNaN(quantityToAdd) && availability2 + quantityToAdd <= props.capacity) {
       setAvailability2(availability2 + quantityToAdd);
+    }
+    else {
+      alert("ERROR: invalid quantity");
     }
   };
 
@@ -39,12 +45,18 @@ function HardwareSet(props: HardwareSetProps) {
     if (!isNaN(quantityToAdd) && availability1 - quantityToAdd >= 0) {
       setAvailability1(availability1 - quantityToAdd);
     }
+    else {
+      alert("ERROR: invalid quantity");
+    }
   };
 
   const handleCheckOut2 = () => {
     const quantityToAdd = parseInt(inputValue, 10);
     if (!isNaN(quantityToAdd) && availability2 - quantityToAdd >= 0) {
       setAvailability2(availability2 - quantityToAdd);
+    }
+    else {
+      alert("ERROR: invalid quantity");
     }
   };
 
