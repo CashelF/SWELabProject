@@ -131,7 +131,6 @@ function JoinProject() {
         <>
         <Container>
             <Navbar/>
-        
             <Join />
         </Container>
        </>

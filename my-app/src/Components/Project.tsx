@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Button, Container, TextField, Stack} from '@mui/material';
 import HardwareSet from './HardwareSet';
 import { useUser } from '../UserContext';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
+
+
 
 interface ProjectProps {
   name: string;
@@ -15,30 +17,27 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = (props) => {
-  const {username} = useUser();
+  const {username} = useUser(); 
   const navigate = useNavigate();
+  const [isProjectVisible, setIsProjectVisible] = useState(true);
 
-  const handleLeave = () => {
+  const handleLeave = async () => {
     //function should remove user from project and remove project from My Project
-    //remove project from user
+    setIsProjectVisible(false);
     console.log("Leave clicked")
         console.log(username)
         console.log(props.projectID)
         const url = `http://localhost:5000/leaveProject/${username}/${props.projectID}`;
-        axios.post(url)
+        const res = await axios.post(url)
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
                 console.log("Leave successful")
-                const url = `/projects`
-                navigate(url);
             }
         })
-    ///remove project from My Project///
-    //HELP
   };
 
-  return (
+  return isProjectVisible ? (
     <Container
       sx={{
         display: 'flex',
@@ -73,7 +72,7 @@ const Project: React.FC<ProjectProps> = (props) => {
           Leave
       </Button>
     </Container>
-  );
+  ): null;
 };
 
 export default Project;

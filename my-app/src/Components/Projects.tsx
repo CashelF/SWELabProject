@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate
 import Project from './Project';
 import axios from 'axios';
 
-
 function Projects({projects}: {projects: any[]}){
 
     // const handleGetUserProject = () => {
@@ -102,7 +101,6 @@ function Projects({projects}: {projects: any[]}){
 
     return (
         <Container sx={{marginBottom: '4rem'}}>
-            <h1>CRY</h1>
             <Button onClick={printProjects}>
                 PAAAAAAAAIIIIIN
             </Button>
