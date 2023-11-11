@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_cors import cross_origin
 from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
 from database.projectDB import createProject, getAllProjects, getProjectsFromIds
 from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability, getHWSet
 
 app = Flask(__name__)
 
-CORS(app)
+cors = CORS(app, resources={r'*' : {"origins": "*"}})
 
 @app.route("/signup/<username>/<password>", methods=['POST'])
 def addUser(username, password):
@@ -50,7 +51,8 @@ def checkOutAPI(HWSetId, qty):
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
-   return queryAvailability(HWSetId)
+   availability = queryAvailability(HWSetId)
+   return jsonify({'availability': availability})
 
 @app.route("/projects", methods=['GET'])
 def getProjects():
@@ -69,4 +71,4 @@ def getGlobalHWSets():
    
 
 if __name__ == "__main__":
-   app.run(debug=True)
+   app.run()
