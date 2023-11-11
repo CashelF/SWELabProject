@@ -40,6 +40,7 @@ function HardwareSet(props: HardwareSetProps) {
           .catch(error => {
               console.error("There was an error!", error)
           });
+        getGlobalHWSetInfo()
   };
 
   useEffect(() => {
@@ -82,7 +83,7 @@ function HardwareSet(props: HardwareSetProps) {
                 console.log(res.data);
                 if (res.data.success === true) {
                   setCheckedOut2(checkedOut2 - quantityToAdd)
-                  setAvailability1(availability1 + quantityToAdd)
+                  setAvailability2(availability2 + quantityToAdd)
                 }
             })
             const url2 = `http://localhost:5000/checkIn/${globalHWSet2Id}/${quantityToAdd}`;
@@ -123,14 +124,14 @@ function HardwareSet(props: HardwareSetProps) {
 
   const handleCheckOut2 = async () => {
     const quantityToAdd = parseInt(inputValue, 10);
-    if (!isNaN(quantityToAdd) && availability2 + quantityToAdd <= props.capacity) {
+    if (!isNaN(quantityToAdd) && availability2 - quantityToAdd <= props.capacity) {
       const url = `http://localhost:5000/checkIn/${props.hwSet1Id}/${quantityToAdd}`;
             const res = await axios.post(url)
             .then(res => {
                 console.log(res.data);
                 if (res.data.success === true) {
                     setCheckedOut2(checkedOut2 + quantityToAdd)
-                    setAvailability1(availability1 - quantityToAdd)
+                    setAvailability2(availability2 - quantityToAdd)
                 }
             })
             const url2 = `http://localhost:5000/checkOut/${globalHWSet2Id}/${quantityToAdd}`;
@@ -219,7 +220,7 @@ function HardwareSet(props: HardwareSetProps) {
                 <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckIn2}>
                   Check In
                 </Button>
-                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={getGlobalHWSetInfo}>
+                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckOut2}>
                   Check Out
                 </Button>
               </Container>
