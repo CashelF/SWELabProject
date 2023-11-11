@@ -31,6 +31,10 @@ function Create() {
                 const url = `/projects`
                 navigate(url);
             }
+            else{
+                //error handling
+                alert("ERROR: Project ID already exists");
+            }
         })
     };
 
