@@ -51,7 +51,7 @@ function HardwareSet(props: HardwareSetProps) {
   const handleCheckIn1 = async () => {
     console.log(props.hwSet1Id)
     const quantityToAdd = parseInt(inputValue, 10);
-    if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity) {
+    if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity && checkedOut1 - quantityToAdd >= 0) {
       // project hwset api call
       const url = `http://localhost:5000/checkOut/${props.hwSet1Id}/${quantityToAdd}`;
             const res = await axios.post(url)
@@ -78,7 +78,7 @@ function HardwareSet(props: HardwareSetProps) {
 
   const handleCheckIn2 = async () => {
     const quantityToAdd = parseInt(inputValue, 10);
-    if (!isNaN(quantityToAdd) && availability2 + quantityToAdd <= props.capacity) {
+    if (!isNaN(quantityToAdd) && availability2 + quantityToAdd <= props.capacity && checkedOut2 - quantityToAdd >= 0) {
       const url = `http://localhost:5000/checkIn/${props.hwSet2Id}/${quantityToAdd}`;
             const res = await axios.post(url)
             .then(res => {
