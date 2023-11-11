@@ -44,18 +44,18 @@ def createProjectAPI(id, name, description, userId):
 
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])
 def checkInAPI(HWSetId, qty):
-   checkIn_HWSet(HWSetId, qty)
+   checkIn_HWSet(HWSetId, int(qty))
    return jsonify({'success': True})
 
 @app.route("/checkOut/<HWSetId>/<qty>", methods=['POST'])
 def checkOutAPI(HWSetId, qty):
-   checkOut_HWSet(HWSetId, qty)
+   checkOut_HWSet(HWSetId, int(qty))
    return jsonify({'success': True})
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
    availability = queryAvailability(HWSetId)
-   return jsonify({'availability': availability})
+   return jsonify({'success': True, 'availability': availability})
 
 @app.route("/projects", methods=['GET'])
 def getProjects():
@@ -70,8 +70,7 @@ def getUserProjects(userId):
 
 @app.route("/globalHWSets", methods=['GET'])
 def getGlobalHWSets():
-   globalHWSets = {'1' : getHWSet(1), '2' : getHWSet(2)}
-   return jsonify({'HWSets': globalHWSets})
+   return jsonify({'HWSet1': getHWSet("1"), 'HWSet2': getHWSet("2")})
    
 
 if __name__ == "__main__":

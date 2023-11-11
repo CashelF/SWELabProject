@@ -26,25 +26,22 @@ const ProjectsPage = () => {
     //let projects = [];
 
 
-    // useEffect(() => {
-    //     const getProjects = async () => {
-    //         console.log(username);
-    //         const url = `http://localhost:5000/userProjects/${username}`;
-    //         const res = await axios.get(url)
-    //         .then(function (res) {
-    //             console.log(res.data.projects);
-    //             setProjects(Array.isArray(res.data.projects) ? res.data.projects : []);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //             setProjects([])
-    //         });
-    //     };
-
-    //     if (username) {
-    //         getProjects();
-    //     }
-    // }, [username, projects]);
+    useEffect(() => {
+        const getProjects = async () => {
+            console.log(username);
+            const url = `http://localhost:5000/userProjects/${username}`;
+            const res = await axios.get(url)
+            .then(function (res) {
+                console.log(res.data.projects);
+                setProjects(Array.isArray(res.data.projects) ? res.data.projects : []);
+            })
+            .catch(function (error) {
+                console.log(error);
+                setProjects([])
+            });
+        };        
+            getProjects();
+    }, [username]);
 
     // const getProjects = () => {
         
@@ -61,22 +58,25 @@ const ProjectsPage = () => {
     //     });
     // }
 
-    useEffect(() => {
-    const getProjects = () => {
-            console.log(username);
-            const url = `http://localhost:5000/userProjects/${username}`;
-            axios.get(url)
-                .then(function (res) {
-                    console.log(res.data.projects);
-                    setProjects(res.data.projects); // Update state with fetched data
-                })
-                .catch(function (error) {
-                    console.error('Error fetching projects:', error);
-                });
-               
-        }
-        getProjects();
-    }, [username]);
+    // useEffect(() => {
+    //     const getProjects = async () => {
+    //         console.log(username);
+    //         const url = `http://localhost:5000/userProjects/${username}`;
+    
+    //         try {
+    //             const response1 = await axios.get(url);
+    //             if (response1.data.success) {
+    //                 console.log(response1.data)
+    //                 setProjects(response1.data.projects);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching projects:', error);
+    //         }
+    //     };
+    
+    //     getProjects();
+    // });
+    
     
 
    
