@@ -36,6 +36,10 @@ function Join() {
                 const url = `/projects`
                 navigate(url);
             }
+            else{
+                //error handling
+                alert("ERROR: " + res.data.success);
+            }
         })
     }
 
