@@ -24,8 +24,11 @@ def getUser(username, password):
    
 @app.route("/joinProject/<userId>/<projectId>", methods=['POST'])
 def joinProjectAPI(userId, projectId):
-   joinProject(userId, projectId)
-   return jsonify({'success': True})
+   status = joinProject(userId, projectId)
+   if status is True:
+      return jsonify({'success': True})
+   else:
+      return jsonify({'success': status})
 
 @app.route("/leaveProject/<userId>/<projectId>", methods=['POST'])
 def leaveProjectAPI(userId, projectId):
