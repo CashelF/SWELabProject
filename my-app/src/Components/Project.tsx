@@ -11,6 +11,8 @@ interface ProjectProps {
   name: string;
   projectID: string;
   description: string;
+  hwSet1Id: string;
+  hwSet2Id: string;
   usedSet1: number;
   usedSet2: number;
   capacity: number;
@@ -36,6 +38,7 @@ const Project: React.FC<ProjectProps> = (props) => {
             }
         })
   };
+
 
   return isProjectVisible ? (
     <Container
@@ -67,7 +70,7 @@ const Project: React.FC<ProjectProps> = (props) => {
           Description: {props.description}
         </Typography>
       </Stack>
-      <HardwareSet usedSet1={props.usedSet1} usedSet2={props.usedSet2} capacity={props.capacity} />
+      <HardwareSet hwSet1Id={props.hwSet1Id} hwSet2Id={props.hwSet2Id} usedSet1={props.usedSet1} usedSet2={props.usedSet2} capacity={props.capacity} />
       <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleLeave}>
           Leave
       </Button>
