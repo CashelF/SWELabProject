@@ -40,7 +40,6 @@ def joinProject(userId, projectId):
    if not collection.find_one({'id': projectId}):
       client.close()
       return "Project does not exist"
-      return "Project does not exist"
     
    # Add project to user profile
    collection = projDb['Users']
@@ -55,7 +54,7 @@ def joinProject(userId, projectId):
    user.addProject(projectId)
    collection.update_one({"userId": user.userId}, {"$set": {"projects": user.projects}})
    client.close()
-   return "Success"
+   return True
     
 def leaveProject(userId, projectId):
    client = db.get_database()

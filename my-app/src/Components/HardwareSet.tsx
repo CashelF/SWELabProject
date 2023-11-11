@@ -70,7 +70,7 @@ function HardwareSet(props: HardwareSetProps) {
                 }
             })
     } else {
-      alert("ERROR: invalid quantity");
+        alert("ERROR: invalid quantity");
     }
 
   };
@@ -95,7 +95,7 @@ function HardwareSet(props: HardwareSetProps) {
                 }
             })
     } else {
-      alert("ERROR: invalid quantity");
+        alert("ERROR: invalid quantity");
     }
   };
 
@@ -121,9 +121,8 @@ function HardwareSet(props: HardwareSetProps) {
                   if (res2.data.success === true) {
                   }
               })
-            }
-            else {
-              alert("ERROR: invalid quantity");
+            } else {
+                alert("ERROR: invalid quantity");
             }
 
     };
@@ -147,9 +146,8 @@ function HardwareSet(props: HardwareSetProps) {
                 if (res2.data.success === true) {
                 }
             })
-    }
-    else {
-      alert("ERROR: invalid quantity");
+    } else {
+        alert("ERROR: invalid quantity");
     }
   };
 
@@ -229,7 +227,7 @@ function HardwareSet(props: HardwareSetProps) {
                 <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckIn2}>
                   Check In
                 </Button>
-                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={getGlobalHWSetInfo}>
+                <Button sx={{ height: '49%',  bgcolor: '#0F1B4C', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleCheckOut2}>
                   Check Out
                 </Button>
               </Container>
