@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_cors import cross_origin
 from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
@@ -8,6 +9,12 @@ from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability, g
 app = Flask(__name__)
 
 cors = CORS(app, resources={r'*' : {"origins": "*"}})
+
+socketio = SocketIO(app)
+
+@socketio.on('checkout_update')
+def checkoutUpdateHandler(data):
+   socketio.emit('checkout_update', data, brodcast=True)
 
 @app.route("/signup/<username>/<password>", methods=['POST'])
 def addUser(username, password):
@@ -47,13 +54,11 @@ def createProjectAPI(id, name, description, userId):
 
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])
 def checkInAPI(HWSetId, qty):
-   checkIn_HWSet(HWSetId, int(qty))
-   return jsonify({'success': True})
+   return jsonify({'message': checkIn_HWSet(HWSetId, int(qty))})
 
 @app.route("/checkOut/<HWSetId>/<qty>", methods=['POST'])
 def checkOutAPI(HWSetId, qty):
-   checkOut_HWSet(HWSetId, int(qty))
-   return jsonify({'success': True})
+   return jsonify({'message': checkOut_HWSet(HWSetId, int(qty))})
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
