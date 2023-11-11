@@ -40,6 +40,7 @@ const Project: React.FC<ProjectProps> = (props) => {
   };
 
 
+
   return isProjectVisible ? (
     <Container
       sx={{
