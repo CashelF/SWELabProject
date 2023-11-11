@@ -65,7 +65,8 @@ def getProjects():
 @app.route("/userProjects/<userId>", methods=['GET'])
 def getUserProjects(userId):
    userProjectIds = getUserProjectIds(userId)
-   return jsonify({'projects': getProjectsFromIds(userProjectIds)})
+   projectsFromIds = getProjectsFromIds(userProjectIds)
+   return jsonify({'projects': projectsFromIds})
 
 @app.route("/globalHWSets", methods=['GET'])
 def getGlobalHWSets():

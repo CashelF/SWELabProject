@@ -4,8 +4,20 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate
 import Project from './Project';
 import axios from 'axios';
 
-function Projects({projects}: {projects: any[]}){
+interface newProject {
+    id: string;
+    name: string;
+    hwSets: string
+    description: string;
+}
 
+function Projects({projects: initialProjects}: {projects: any[]}){
+    const [currentProjects, setCurrentProjects] = useState<newProject[]>([]);
+    const [projectComponents, setProjectComponents] = useState<JSX.Element[]>([]);
+    // useEffect(() => {
+    //     setProjects(initialProjects);
+    //     console.log(projects)
+    // }, [initialProjects]);
     // const handleGetUserProject = () => {
     //     console.log("Login clicked")
     //     console.log(state.username)
@@ -20,10 +32,62 @@ function Projects({projects}: {projects: any[]}){
     //         }
     //     })
     // }
+    useEffect(() => {
+        // Function to check if a project already exists in currentProjects
+        const projectExists = (newProject: newProject) => {
+            return currentProjects.some(project => project.name === newProject.name);
+        };
+
+        initialProjects.forEach(newProject => {
+            if (!projectExists(newProject)) {
+                const projectComponent = createReactObject(newProject)
+                setCurrentProjects(prevProjects => [...prevProjects, newProject]);
+                setProjectComponents(prevComponents => [...prevComponents, projectComponent]);
+            }
+        });
+    }, [initialProjects]);
 
     const printProjects = () => {
-        console.log(projects)
-    };
+        console.log(currentProjects)
+    }
+
+    const createReactObject = (project: newProject) => {
+        console.log(project)
+        console.log(project["name"])
+        console.log(project.hwSets["1"])
+        console.log(project.hwSets["2"])
+        let availability1 = 0
+        let availability2 = 0
+        // hw set1
+        const url = `http://localhost:5000/queryAvailability/${project.hwSets["1"]}`
+        axios.get(url)
+            .then(res => {
+                console.log(res.data.availability)
+                if (res.data.success == true) {
+                    availability1 = res.data.availability
+                    console.log(availability1)
+                }
+            })
+            .catch(error => {
+                console.error("There was an error!", error)
+            });
+        //hwset2
+        const url2 = `http://localhost:5000/queryAvailability/${project.hwSets["2"]}`
+        axios.get(url2)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.success == true) {
+                    availability2 = res.data.availability
+                    console.log(availability2)
+                }
+            })
+            .catch(error => {
+                console.error("There was an error!", error)
+           });
+            return <Project name={project["name"]} projectID={project["id"]} description={project["description"]} usedSet1={availability1} usedSet2={availability2} capacity={500}/>
+
+    }
+   
 
         // // Function to fetch availability for each project
         // const fetchAvailability = async (hwSet1Id: string) => {
@@ -45,39 +109,7 @@ function Projects({projects}: {projects: any[]}){
         //     }
         // };
 
-    const projectItems = projects.map((proj: any, index: number) => {
-        let hwSet1Id = proj.hwSets[1]
-        let hwSet2Id = proj.hwSets[2]
-        console.log(hwSet1Id)
-        let availability2 = 0
-        let capacity = 0
-        //let availability1 = fetchAvailability(hwSet1Id)
-        //hardwareset1 availability call
-        // const url = `http://localhost:5000/testFunction/${hwSet1Id}`;
-        // axios.get(url)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.success === true) {
-        //             let availability1 = res.data;
-        //             console.log("Join su");
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error('There was an error!', error);
-        //     });
-        // hardwareset2 availability call
-        // const url2 = `http://localhost:5000/queryAvailability/${hwSet2Id}`;
-        // axios.post(url)
-        // .then(res => {
-        //     console.log(res.data);
-        //     if (res.data.success === true) {
-        //         console.log("Join su")
-        //         const url = `/projects`
-        //     }
-        // })
-        //return <Project name={proj.name} projectID={proj.id} description={proj.description} usedSet1={0} usedSet2={0} capacity={100} />
-        // Replace with your actual project component or rendering logic
-    });
+    
 
     // const project = props.projects.map((proj: any) => {
     //      console.log(props.projects)
@@ -85,26 +117,10 @@ function Projects({projects}: {projects: any[]}){
     //  });
     
 
-    // const handleGetUserProject = () => {
-    //     console.log("Login clicked")
-    //     console.log(state.username)
-    //     let username = state.username
-    //     const url = `http://localhost:5000/joinProject/${state.username}/${projectId}`;
-    //     axios.post(url)
-    //     .then(res => {
-    //         console.log(res.data);
-    //         if (res.data.success === true) {
-    //             console.log("Join su")
-    //             const url = `/projects`
-    //         }
-    //     })
-    // }
-
+    
     return (
         <Container sx={{marginBottom: '4rem'}}>
-            <Button onClick={printProjects}>
-                PAAAAAAAAIIIIIN
-            </Button>
+            {projectComponents}
         </Container>
     );
 };
