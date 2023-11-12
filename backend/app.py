@@ -11,7 +11,7 @@ app = Flask(__name__, static_folder='SWELabProject/my-app/build', static_url_pat
 
 cors = CORS(app, resources={r'*' : {"origins": "*"}})
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @socketio.on('checkout_update')
 def checkoutUpdateHandler(data):
@@ -55,6 +55,10 @@ def createProjectAPI(id, name, description, userId):
    joinProject(userId, id)
    return jsonify({'success': True})
 
+@socketio.on("connect")
+def connected():
+   print("It is connected")
+
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])
 def checkInAPI(HWSetId, qty):
    return jsonify({'message': checkIn_HWSet(HWSetId, int(qty))})
@@ -82,7 +86,10 @@ def getUserProjects(userId):
 @app.route("/globalHWSets", methods=['GET'])
 def getGlobalHWSets():
    return jsonify({'HWSet1': getHWSet("1"), 'HWSet2': getHWSet("2")})
-   
+
+@socketio.on('update_global_availability1')
+def handle_update_availability1(data):
+   socketio.emit('availability1_updated', data, broadcast=True)   
 
 if __name__ == "__main__":
    app.run()
