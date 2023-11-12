@@ -34,6 +34,7 @@ const Project: React.FC<ProjectProps> = (props) => {
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
+                window.location.reload();
                 console.log("Leave successful")
             }
         })
