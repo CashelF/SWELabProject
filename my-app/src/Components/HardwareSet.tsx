@@ -1,6 +1,10 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Typography, Button, Container, TextField, Stack } from '@mui/material';
 import axios from 'axios';
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:5000')
+
 interface HardwareSetProps {
   usedSet1: number;
   usedSet2: number;
@@ -40,15 +44,45 @@ function HardwareSet(props: HardwareSetProps) {
           .catch(error => {
               console.error("There was an error!", error)
           });
-        getGlobalHWSetInfo()
   };
 
   useEffect(() => {
+    socket.connect();
     getGlobalHWSetInfo()
+    socket.on('availability1_updated', (data) => {
+      console.log("Recieved data for availability1 ", data.availability1)
+      setAvailability1(data.availability1)
+    //   if(data.hwSet1Id == props.hwSet1Id) {
+    //     setCheckedOut1(data.checkedOut1);
+    //     setAvailability1(data.availability1)
+    //   }else{
+    //     setCheckedOut2(data.checkedOut2);
+    //     setAvailability2(data.availability2);
+    //   }
+     });
+    return () => {
+      socket.off('availability1_updated')
+    };
+
   }, []);
 
-  // Check-in
   const handleCheckIn1 = async () => {
+    socket.connect()
+    console.log(props.hwSet1Id)
+    const quantityToAdd = parseInt(inputValue, 10);
+    if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity && checkedOut1 - quantityToAdd >= 0) {
+      socket.on('availability1_updated', (data) => {
+        console.log("Recieved data for availability1 ", data.availability1)
+        setAvailability1(data.availability1)
+        setCheckedOut1(checkedOut1 - quantityToAdd)
+        setAvailability1(availability1 + quantityToAdd)
+        console.log("Availability1 ", availability1)
+        socket.emit('availability1', availability1)
+       });
+    }
+  };
+  // Check-in
+  const handleCheckIn15 = async () => {
     console.log(props.hwSet1Id)
     const quantityToAdd = parseInt(inputValue, 10);
     if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity && checkedOut1 - quantityToAdd >= 0) {
