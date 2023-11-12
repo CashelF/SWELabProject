@@ -40,7 +40,7 @@ function HardwareSet(props: HardwareSetProps) {
           .catch(error => {
               console.error("There was an error!", error)
           });
-        getGlobalHWSetInfo()
+        // getGlobalHWSetInfo()
   };
 
   useEffect(() => {
