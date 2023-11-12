@@ -40,7 +40,7 @@ def joinProject(userId, projectId):
    if not collection.find_one({'id': projectId}):
       print("Project does not exist")
       client.close()
-      return
+      return "Project does not exist"
     
    # Add project to user profile
    collection = projDb['Users']
@@ -48,10 +48,14 @@ def joinProject(userId, projectId):
       print("User does not exist")
       client.close()
       return
+   # Need to check if user has already joined the project
+   # CHECK HERE
+   #  return "You have already joined this project"
    user = User.from_dict(collection.find_one({'userId': userId}))
    user.addProject(projectId)
    collection.update_one({"userId": user.userId}, {"$set": {"projects": user.projects}})
    client.close()
+   return True
     
 def leaveProject(userId, projectId):
    client = db.get_database()
@@ -63,7 +67,7 @@ def leaveProject(userId, projectId):
       client.close()
       return
     
-   # Add project to user profile
+   # Leave project to user profile
    collection = projDb['Users']
    if not collection.find_one({'userId': userId}):
       print("User does not exist")

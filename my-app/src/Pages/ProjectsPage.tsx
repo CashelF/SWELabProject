@@ -12,19 +12,25 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate
 import axios from 'axios';
 import { useUser } from '../UserContext';
 
+export const useProjectsState = () => {
+    const [projects, setProjects] = useState([]);
+    return { projects, setProjects };
+  };
 
 
 const ProjectsPage = () => {
 
     const {username} = useUser();
-    const [projects, setProjects] = useState([]);
+    let [projects, setProjects] = useState([]);
+    //const { projects, setProjects } = useProjectsState();
+    //let projects = [];
 
 
     useEffect(() => {
-        const getProjects = () => {
+        const getProjects = async () => {
             console.log(username);
             const url = `http://localhost:5000/userProjects/${username}`;
-            axios.get(url)
+            const res = await axios.get(url)
             .then(function (res) {
                 console.log(res.data.projects);
                 setProjects(Array.isArray(res.data.projects) ? res.data.projects : []);
@@ -33,11 +39,8 @@ const ProjectsPage = () => {
                 console.log(error);
                 setProjects([])
             });
-        };
-
-        if (username) {
+        };        
             getProjects();
-        }
     }, [username]);
 
     // const getProjects = () => {
@@ -47,16 +50,43 @@ const ProjectsPage = () => {
     //     axios.get(url)
     //     .then(function (res) {
     //         console.log(res.data.projects);
-    //         return res.data.projects;
+    //         setProjects = res.data.projects;
     //     })
+    //     .catch(function (error) {
+    //         // Handle error here
+    //         console.error('Error fetching projects:', error);
+    //     });
     // }
 
+    // useEffect(() => {
+    //     const getProjects = async () => {
+    //         console.log(username);
+    //         const url = `http://localhost:5000/userProjects/${username}`;
+    
+    //         try {
+    //             const response1 = await axios.get(url);
+    //             if (response1.data.success) {
+    //                 console.log(response1.data)
+    //                 setProjects(response1.data.projects);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching projects:', error);
+    //         }
+    //     };
+    
+    //     getProjects();
+    // });
+    
+    
 
+   
+
+//Projects projects={projects}/> 
     
     return (
        <Container>
             <Navbar/>
-            <Projects projects={projects}/> 
+            <Projects projects={projects}/>
        </Container>
     );
 };

@@ -25,11 +25,11 @@ def checkIn_HWSet(HWSetId, qty):
    collection = projDb.HardwareSets
    document = collection.find_one({"id": HWSetId})
    if not document:
-      print("Hardware Set ${HWSetId} does not exist")
-      return
+      return f"Hardware Set {HWSetId} does not exist"
    hwSet = HWSet.from_dict(collection.find_one({"id": HWSetId}))
    hwSet.checkIn(qty)
    collection.update_one({"id": HWSetId}, {"$set": {"availability": hwSet.availability}})
+   return "Success"
     
 def checkOut_HWSet(HWSetId, qty):
    client = db.get_database()
@@ -37,14 +37,13 @@ def checkOut_HWSet(HWSetId, qty):
    collection = projDb.HardwareSets
    document = collection.find_one({"id": HWSetId})
    if not document:
-      print("Hardware Set ${HWSetId} does not exist")
-      return
+      return f"Hardware Set {HWSetId} does not exist"
    hwSet = HWSet.from_dict(collection.find_one({"id": HWSetId}))
    if qty > hwSet.availability:
-      print("Hardware Set ${HWSetId} doesn't have enough to check out")
-      return
+      return f"Hardware Set {HWSetId} doesn't have enough for that"
    hwSet.checkOut(qty)
    collection.update_one({"id": HWSetId}, {"$set": {"availability": hwSet.availability}})
+   return "Success"
 
 def queryAvailability(HWSetId):
    try:

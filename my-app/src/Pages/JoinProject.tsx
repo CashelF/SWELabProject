@@ -24,7 +24,7 @@ function Join() {
     }
     const navigate = useNavigate();
     const handleJoinProject = () => {
-        console.log("Login clicked")
+        console.log("Join clicked")
         console.log(username)
         console.log(projectId)
         const url = `http://localhost:5000/joinProject/${username}/${projectId}`;
@@ -32,14 +32,18 @@ function Join() {
         .then(res => {
             console.log(res.data);
             if (res.data.success === true) {
-                console.log("Join su")
+                console.log("Join successful")
                 const url = `/projects`
                 navigate(url);
+            }
+            else{
+                //error handling
+                alert("ERROR: " + res.data.success);
             }
         })
     }
 
-    
+
   
     return (
         <div style={{ display: 'flex', height: '80vh'}}>
@@ -131,8 +135,8 @@ function JoinProject() {
         <>
         <Container>
             <Navbar/>
-        </Container>
             <Join />
+        </Container>
        </>
     );
 }

@@ -1,23 +1,46 @@
-import React from 'react';
-import { Typography, Button, Container, TextField, Stack } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Typography, Button, Container, TextField, Stack} from '@mui/material';
 import HardwareSet from './HardwareSet';
+import { useUser } from '../UserContext';
+import axios from 'axios';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate} from 'react-router-dom';
+
+
 
 interface ProjectProps {
   name: string;
   projectID: string;
   description: string;
+  hwSet1Id: string;
+  hwSet2Id: string;
   usedSet1: number;
   usedSet2: number;
   capacity: number;
 }
 
 const Project: React.FC<ProjectProps> = (props) => {
+  const {username} = useUser(); 
+  const navigate = useNavigate();
+  const [isProjectVisible, setIsProjectVisible] = useState(true);
 
-  const handleLeave = () => {
+  const handleLeave = async () => {
     //function should remove user from project and remove project from My Project
+    setIsProjectVisible(false);
+    console.log("Leave clicked")
+        console.log(username)
+        console.log(props.projectID)
+        const url = `http://localhost:5000/leaveProject/${username}/${props.projectID}`;
+        const res = await axios.post(url)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.success === true) {
+                console.log("Leave successful")
+            }
+        })
   };
 
-  return (
+
+  return isProjectVisible ? (
     <Container
       sx={{
         display: 'flex',
@@ -47,12 +70,12 @@ const Project: React.FC<ProjectProps> = (props) => {
           Description: {props.description}
         </Typography>
       </Stack>
-      <HardwareSet usedSet1={props.usedSet1} usedSet2={props.usedSet2} capacity={props.capacity} />
+      <HardwareSet hwSet1Id={props.hwSet1Id} hwSet2Id={props.hwSet2Id} usedSet1={props.usedSet1} usedSet2={props.usedSet2} capacity={props.capacity} />
       <Button sx={{ height: '49%', bgcolor: '#0F1B4C', marginRight: '0.5rem', "&:hover": {bgcolor: "#7398F7"}}} variant="contained" onClick={handleLeave}>
           Leave
       </Button>
     </Container>
-  );
+  ): null;
 };
 
 export default Project;

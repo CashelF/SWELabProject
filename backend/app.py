@@ -1,12 +1,20 @@
 from flask import Flask, request, jsonify
+from flask_socketio import SocketIO
 from flask_cors import CORS
+from flask_cors import cross_origin
 from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
 from database.projectDB import createProject, getAllProjects, getProjectsFromIds
 from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability, getHWSet
 
 app = Flask(__name__)
 
-CORS(app)
+cors = CORS(app, resources={r'*' : {"origins": "*"}})
+
+socketio = SocketIO(app)
+
+@socketio.on('checkout_update')
+def checkoutUpdateHandler(data):
+   socketio.emit('checkout_update', data, brodcast=True)
 
 @app.route("/signup/<username>/<password>", methods=['POST'])
 def addUser(username, password):
@@ -23,8 +31,11 @@ def getUser(username, password):
    
 @app.route("/joinProject/<userId>/<projectId>", methods=['POST'])
 def joinProjectAPI(userId, projectId):
-   joinProject(userId, projectId)
-   return jsonify({'success': True})
+   status = joinProject(userId, projectId)
+   if status is True:
+      return jsonify({'success': True})
+   else:
+      return jsonify({'success': status})
 
 @app.route("/leaveProject/<userId>/<projectId>", methods=['POST'])
 def leaveProjectAPI(userId, projectId):
@@ -32,24 +43,24 @@ def leaveProjectAPI(userId, projectId):
    return jsonify({'success': True})
    
    
-@app.route("/createProject/<id>/<name>/<description>", methods=['POST'])
-def createProjectAPI(id, name, description):
+@app.route("/createProject/<id>/<name>/<description>/<userId>", methods=['POST'])
+def createProjectAPI(id, name, description, userId):
    createProject(id, name, description)
+   joinProject(userId, id)
    return jsonify({'success': True})
 
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])
 def checkInAPI(HWSetId, qty):
-   checkIn_HWSet(HWSetId, qty)
-   return jsonify({'success': True})
+   return jsonify({'message': checkIn_HWSet(HWSetId, int(qty))})
 
 @app.route("/checkOut/<HWSetId>/<qty>", methods=['POST'])
 def checkOutAPI(HWSetId, qty):
-   checkOut_HWSet(HWSetId, qty)
-   return jsonify({'success': True})
+   return jsonify({'message': checkOut_HWSet(HWSetId, int(qty))})
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
-   return queryAvailability(HWSetId)
+   availability = queryAvailability(HWSetId)
+   return jsonify({'success': True, 'availability': availability})
 
 @app.route("/projects", methods=['GET'])
 def getProjects():
@@ -59,13 +70,13 @@ def getProjects():
 @app.route("/userProjects/<userId>", methods=['GET'])
 def getUserProjects(userId):
    userProjectIds = getUserProjectIds(userId)
-   return jsonify({'projects': getProjectsFromIds(userProjectIds)})
+   projectsFromIds = getProjectsFromIds(userProjectIds)
+   return jsonify({'projects': projectsFromIds})
 
 @app.route("/globalHWSets", methods=['GET'])
 def getGlobalHWSets():
-   globalHWSets = {'1' : getHWSet(1), '2' : getHWSet(2)}
-   return jsonify({'HWSets': globalHWSets})
+   return jsonify({'HWSet1': getHWSet("1"), 'HWSet2': getHWSet("2")})
    
 
 if __name__ == "__main__":
-   app.run(debug=True)
+   app.run()
