@@ -1,10 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 interface UserContextState {
   username: string;
   setUsername: (username: string) => void;
 }
-
 
 const UserContext = createContext<UserContextState | undefined>(undefined);
 
@@ -12,9 +11,16 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [username, setUsername] = useState('');
+  // Initialize username state with the value from localStorage
+  const [username, setUsername] = useState(() => {
+    return localStorage.getItem('username') || '';
+  });
+
+  // Update localStorage whenever username changes
+  useEffect(() => {
+    localStorage.setItem('username', username);
+  }, [username]);
 
   return (
     <UserContext.Provider value={{ username, setUsername }}>
@@ -22,7 +28,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     </UserContext.Provider>
   );
 };
-
 
 export const useUser = (): UserContextState => {
   const context = useContext(UserContext);
