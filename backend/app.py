@@ -65,7 +65,10 @@ def checkInAPI(HWSetId, qty):
 
 @app.route("/checkOut/<HWSetId>/<qty>", methods=['POST'])
 def checkOutAPI(HWSetId, qty):
-   return jsonify({'message': checkOut_HWSet(HWSetId, int(qty))})
+   message = checkOut_HWSet(HWSetId, int(qty))
+   availability = queryAvailability(HWSetId)
+   socketio.emit('update_global_availability1', {'availability1': availability}, broadcast=True)
+   return jsonify({'message': {message}})
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
@@ -87,7 +90,7 @@ def getUserProjects(userId):
 def getGlobalHWSets():
    return jsonify({'HWSet1': getHWSet("1"), 'HWSet2': getHWSet("2")})
 
-@socketio.on('update_global_availability1')
+@socketio.on('global_availability1_update')
 def handle_update_availability1(data):
    socketio.emit('availability1_updated', {"message" : data}, broadcast=True)   
 

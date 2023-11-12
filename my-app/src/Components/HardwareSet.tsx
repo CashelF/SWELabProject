@@ -49,7 +49,7 @@ function HardwareSet(props: HardwareSetProps) {
   useEffect(() => {
     socket.connect();
     getGlobalHWSetInfo()
-    socket.on('availability1_updated', (data) => {
+    socket.on('global_availability1_update', (data) => {
       console.log("Recieved data for availability1 ", data.availability1)
       setAvailability1(data.availability1)
     //   if(data.hwSet1Id == props.hwSet1Id) {
@@ -61,23 +61,22 @@ function HardwareSet(props: HardwareSetProps) {
     //   }
      });
     return () => {
-      socket.off('availability1_updated')
+      socket.off('global_availability1_update')
     };
 
   }, []);
 
   const handleCheckIn1 = async () => {
-    socket.connect()
     console.log(props.hwSet1Id)
     const quantityToAdd = parseInt(inputValue, 10);
     if (!isNaN(quantityToAdd) && availability1 + quantityToAdd <= props.capacity && checkedOut1 - quantityToAdd >= 0) {
-      socket.on('availability1_updated', (data) => {
+      socket.on('global_availability1_update', (data) => {
         console.log("Recieved data for availability1 ", data.availability1)
         setAvailability1(data.availability1)
         setCheckedOut1(checkedOut1 - quantityToAdd)
         setAvailability1(availability1 + quantityToAdd)
         console.log("Availability1 ", availability1)
-        socket.emit('availability1', availability1)
+        socket.emit('global_availability1_update', availability1)
        });
     }
   };
