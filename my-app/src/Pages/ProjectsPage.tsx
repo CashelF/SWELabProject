@@ -77,12 +77,12 @@ const ProjectsPage = () => {
     };
 
     
-    // return (
-    //    <Container>
-    //         <Navbar/>
-    //         <Projects projects={projects}/>
-    //    </Container>
-    // );
+//     return (
+//        <Container>
+//             <Navbar/>
+//             <Projects projects={projects}/>
+//        </Container>
+//     );
 // };
 
 export default ProjectsPage;

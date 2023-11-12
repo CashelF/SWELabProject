@@ -53,6 +53,10 @@ function LoginPage() {
         })
     }
 
+    const handleForgotPword = () => {
+        alert("That's too bad")
+    }
+
     return isLoginValid ? (
         <div style={{ display: 'flex', height: '100vh'}}>
         <Grid container sx={{ padding: '0 0 0 0' ,
@@ -161,13 +165,14 @@ function LoginPage() {
                                 />
                         </FormControl>
                     </Stack>
-                    <Typography sx={{
+                    <Button onClick={handleForgotPword} sx={{
                         color: '#ffffff50',
                         fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                         fontWeight: '400',
-                        paddingTop: '16px'
+                        paddingTop: '16px',
+                        justifyContent: "left",
                     }}>Forgot Password?
-                    </Typography>
+                    </Button>
                         <Button onClick={handleLogin} variant="contained" sx={{
                             bgcolor: '#7398F7',
                             color: 'white',
@@ -321,13 +326,14 @@ function LoginPage() {
                         paddingTop: '16px'
                     }}>Invalid Username or Password
                     </Typography>
-                    <Typography sx={{
+                    <Button onClick={handleForgotPword} sx={{
                         color: '#ffffff50',
                         fontSize: {xl: '16px', lg: '16px', md: '12px', sm: '12px', xs: '12px'},
                         fontWeight: '400',
-                        paddingTop: '16px'
+                        paddingTop: '16px',
+                        justifyContent: "left",
                     }}>Forgot Password?
-                    </Typography>
+                    </Button>
                         <Button onClick={handleLogin} variant="contained" sx={{
                             bgcolor: '#7398F7',
                             color: 'white',
