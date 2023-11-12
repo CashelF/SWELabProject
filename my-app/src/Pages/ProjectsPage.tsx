@@ -26,7 +26,7 @@ const ProjectsPage = () => {
 
     const {username} = useUser();
     let [projects, setProjects] = useState<Project[]>([]);
-    //const [selectedProjectId, setSelectedProjectId] = useState('');
+    const [selectedProjectId, setSelectedProjectId] = useState('');
 
 
     useEffect(() => {
@@ -47,44 +47,42 @@ const ProjectsPage = () => {
     }, [username]);
 
 
-    // const handleSelectChange = (event: any) => {
-    //     setSelectedProjectId(event.target.value);
-    //   };
+    const handleSelectChange = (event: any) => {
+        setSelectedProjectId(event.target.value);
+      };
     
-    //   return (
-    //     <Container>
-    //       <Navbar/>
-    //       <FormControl fullWidth>
-    //         <InputLabel id="project-select-label">Project</InputLabel>
-    //         <Select
-    //           labelId="project-select-label"
-    //           id="project-select"
-    //           value={selectedProjectId}
-    //           label="Project"
-    //           onChange={handleSelectChange}
-    //           style={{ backgroundColor: '#E6F0FF' }}
-    //         >
-    //           {projects.map((project) => (
-    //             <MenuItem key={project.id} value={project.id}>
-    //               {project.id}
-    //             </MenuItem>
-    //           ))}
-    //         </Select>
-    //       </FormControl>
-    //       <Projects projects={projects.filter(p => p.id === selectedProjectId)} />
-    //     </Container>
-    //   );
-    // };
+      return (
+        <Container>
+          <Navbar/>
+          <FormControl fullWidth>
+            <InputLabel id="project-select-label">Project</InputLabel>
+            <Select
+              labelId="project-select-label"
+              id="project-select"
+              value={selectedProjectId}
+              label="Project"
+              onChange={handleSelectChange}
+              style={{ backgroundColor: '#E6F0FF' }}
+            >
+              {projects.map((project) => (
+                <MenuItem key={project.id} value={project.id}>
+                  {project.id}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Projects projects={projects.filter(p => p.id === selectedProjectId)} />
+        </Container>
+      );
+    };
 
-
-//Projects projects={projects}/> 
     
-    return (
-       <Container>
-            <Navbar/>
-            <Projects projects={projects}/>
-       </Container>
-    );
-};
+//     return (
+//        <Container>
+//             <Navbar/>
+//             <Projects projects={projects}/>
+//        </Container>
+//     );
+// };
 
 export default ProjectsPage;
