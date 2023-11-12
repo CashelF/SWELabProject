@@ -12,17 +12,11 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation, useNavigate
 import axios from 'axios';
 import { useUser } from '../UserContext';
 
-export const useProjectsState = () => {
-    const [projects, setProjects] = useState([]);
-    return { projects, setProjects };
-  };
-
 
 const ProjectsPage = () => {
 
     const {username} = useUser();
     let [projects, setProjects] = useState([]);
-    //const { projects, setProjects } = useProjectsState();
     //let projects = [];
 
 

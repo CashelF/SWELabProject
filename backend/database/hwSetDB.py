@@ -29,7 +29,7 @@ def checkIn_HWSet(HWSetId, qty):
    hwSet = HWSet.from_dict(collection.find_one({"id": HWSetId}))
    hwSet.checkIn(qty)
    collection.update_one({"id": HWSetId}, {"$set": {"availability": hwSet.availability}})
-   return "Success"
+   return True
     
 def checkOut_HWSet(HWSetId, qty):
    client = db.get_database()
@@ -43,7 +43,7 @@ def checkOut_HWSet(HWSetId, qty):
       return f"Hardware Set {HWSetId} doesn't have enough for that"
    hwSet.checkOut(qty)
    collection.update_one({"id": HWSetId}, {"$set": {"availability": hwSet.availability}})
-   return "Success"
+   return True
 
 def queryAvailability(HWSetId):
    try:

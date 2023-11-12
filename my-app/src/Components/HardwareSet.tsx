@@ -70,6 +70,8 @@ function HardwareSet(props: HardwareSetProps) {
                 if (res2.data.success === true) {
                 }
             })
+    } else {
+        alert("ERROR: invalid quantity");
     }
 
   };
@@ -93,6 +95,8 @@ function HardwareSet(props: HardwareSetProps) {
                 if (res2.data.success === true) {
                 }
             })
+    } else {
+        alert("ERROR: invalid quantity");
     }
   };
 
@@ -100,7 +104,6 @@ function HardwareSet(props: HardwareSetProps) {
   const handleCheckOut1 = async () => {
     const quantityToAdd = parseInt(inputValue, 10);
     if (!isNaN(quantityToAdd) && availability1 - quantityToAdd >= 0) {
-      const quantityToAdd = parseInt(inputValue, 10);
         const url = `http://localhost:5000/checkIn/${props.hwSet1Id}/${quantityToAdd}`;
         console.log(url)
               const res = await axios.post(url)
@@ -118,13 +121,15 @@ function HardwareSet(props: HardwareSetProps) {
                   if (res2.data.success === true) {
                   }
               })
+            } else {
+                alert("ERROR: invalid quantity");
             }
 
     };
 
   const handleCheckOut2 = async () => {
     const quantityToAdd = parseInt(inputValue, 10);
-    if (!isNaN(quantityToAdd) && availability2 - quantityToAdd <= props.capacity) {
+    if (!isNaN(quantityToAdd) && availability2 - quantityToAdd >= 0) {
       const url = `http://localhost:5000/checkIn/${props.hwSet1Id}/${quantityToAdd}`;
             const res = await axios.post(url)
             .then(res => {
@@ -141,6 +146,8 @@ function HardwareSet(props: HardwareSetProps) {
                 if (res2.data.success === true) {
                 }
             })
+    } else {
+        alert("ERROR: invalid quantity");
     }
   };
 
