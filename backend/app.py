@@ -1,13 +1,19 @@
 from flask import Flask, request, jsonify
+from flask.helpers import send_from_directory
 from flask_cors import CORS
 from flask_cors import cross_origin
 from database.userDB import joinProject, leaveProject, addNewUser, getExistingUser, getUserProjectIds
 from database.projectDB import createProject, getAllProjects, getProjectsFromIds
 from database.hwSetDB import checkIn_HWSet, checkOut_HWSet, queryAvailability, getHWSet
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='SWELabProject/my-app/build', static_url_path='')
 
 cors = CORS(app, resources={r'*' : {"origins": "*"}})
+
+@app.route('/')
+@cross_origin()
+def serve():
+   return send_from_directory(app.static_folder, 'index.html')
 
 @app.route("/signup/<username>/<password>", methods=['POST'])
 def addUser(username, password):
