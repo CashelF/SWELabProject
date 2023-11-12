@@ -11,11 +11,7 @@ app = Flask(__name__, static_folder='SWELabProject/my-app/build', static_url_pat
 
 cors = CORS(app, resources={r'*' : {"origins": "*"}})
 
-socketio = SocketIO(app)
 
-@socketio.on('checkout_update')
-def checkoutUpdateHandler(data):
-   socketio.emit('checkout_update', data, brodcast=True)
 
 @app.route('/')
 @cross_origin()
