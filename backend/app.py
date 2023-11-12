@@ -54,11 +54,11 @@ def createProjectAPI(id, name, description, userId):
 
 @app.route("/checkIn/<HWSetId>/<qty>", methods=['POST'])
 def checkInAPI(HWSetId, qty):
-   return jsonify({'message': checkIn_HWSet(HWSetId, int(qty))})
+   return jsonify({'success': checkIn_HWSet(HWSetId, int(qty))})
 
 @app.route("/checkOut/<HWSetId>/<qty>", methods=['POST'])
 def checkOutAPI(HWSetId, qty):
-   return jsonify({'message': checkOut_HWSet(HWSetId, int(qty))})
+   return jsonify({'success': checkOut_HWSet(HWSetId, int(qty))})
 
 @app.route("/queryAvailability/<HWSetId>", methods=['GET'])
 def queryAvailabilityAPI(HWSetId):
