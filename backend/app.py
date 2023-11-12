@@ -89,7 +89,7 @@ def getGlobalHWSets():
 
 @socketio.on('update_global_availability1')
 def handle_update_availability1(data):
-   socketio.emit('availability1_updated', data, broadcast=True)   
+   socketio.emit('availability1_updated', {"message" : data}, broadcast=True)   
 
 if __name__ == "__main__":
    app.run()
