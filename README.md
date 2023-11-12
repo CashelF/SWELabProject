@@ -39,3 +39,7 @@ Make sure to add these in the terminal using npm:
 4. pip install pymongo
 5. pip install flask
 6. pip install flask-cors
+
+dependencies: install everything in requirments.txt
+run app.py to start the server
+run npm start after cding into my-app
