@@ -10,6 +10,7 @@ def addNewUser(userId, password):
       user = User(userId, encryptedPass)
       collection.insert_one(user.to_dict())
       client.close()
+      return True
    except Exception as ex:
       template = "An exception of type {0} occurred. Arguments:\n{1!r}"
       print(template.format(type(ex).__name__, ex.args))
