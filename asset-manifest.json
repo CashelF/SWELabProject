@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SWELabProject/static/css/main.073c9b0a.css",
-    "main.js": "/SWELabProject/static/js/main.ae6258b1.js",
+    "main.js": "/SWELabProject/static/js/main.53b77103.js",
     "static/js/787.28cb0dcd.chunk.js": "/SWELabProject/static/js/787.28cb0dcd.chunk.js",
     "static/media/login_image.png": "/SWELabProject/static/media/login_image.813858c9d2f7d209ae8b.png",
     "static/media/profile_icon.png": "/SWELabProject/static/media/profile_icon.9e4745a27351f6317a61.png",
@@ -10,11 +10,11 @@
     "static/media/hero_img.png": "/SWELabProject/static/media/hero_img.a5759f286ea4558fa5c9.png",
     "index.html": "/SWELabProject/index.html",
     "main.073c9b0a.css.map": "/SWELabProject/static/css/main.073c9b0a.css.map",
-    "main.ae6258b1.js.map": "/SWELabProject/static/js/main.ae6258b1.js.map",
+    "main.53b77103.js.map": "/SWELabProject/static/js/main.53b77103.js.map",
     "787.28cb0dcd.chunk.js.map": "/SWELabProject/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.ae6258b1.js"
+    "static/js/main.53b77103.js"
   ]
 }
