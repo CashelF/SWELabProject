@@ -8,11 +8,11 @@ import LandingPage from './Pages/LandingPage';
 import ProjectsPage from './Pages/ProjectsPage';
 import CreateNewProject from './Pages/CreateNewProject';
 import JoinProject from './Pages/JoinProject';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { UserProvider } from './UserContext';
 function App() {
   return (
-      <BrowserRouter>
+      <Router>
       <UserProvider>
         <main>
           <Routes>
@@ -25,7 +25,7 @@ function App() {
           </Routes>
         </main>
         </UserProvider>
-      </BrowserRouter>
+      </Router>
   );
 }
 
